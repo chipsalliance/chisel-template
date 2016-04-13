@@ -15,7 +15,7 @@ cd ~/ChiselProjects
 git clone https://github.com/ucb-bar/chisel-tutorial.git MyChiselProject
 cd MyChiselProject
 ```
-### Make your project and fresh git repo
+### Make your project into a fresh git repo
 There may be more elegant way to do it, but the following works for me. **Note:** this project comes with a magnificent 339 line (at this writing) .gitignore file.
  You may want to edit that first in case we missed something, whack away at it, or start it from scratch.
 ```sh
@@ -24,11 +24,11 @@ git init
 git add .gitignore *
 git commit -m 'Starting MyChiselProject'
 ```
-Connecting this up to github or elsewhere is an exercise left to the reader.
+Connecting this up to github or some other remote host is an exercise left to the reader.
 ### Did it work?
-You should now have a project based on Chisel3 that can be run.  **Note:** With a nod to cargo cult thinking, I believe 
-it is best to execute the following sbt before opening up this directory. I have no formal proof of this assertion.
-So go for it
+You should now have a project based on Chisel3 that can be run.  **Note:** With a nod to cargo cult thinking, some believe 
+it is best to execute the following sbt before opening up this directory in your IDE. I have no formal proof of this assertion.
+So go for it, at the command line in the project root.
 ```sh
 sbt test
 ```
@@ -49,12 +49,13 @@ Simulation completed at time 62 (cycle 6)
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1
 [success] Total time: 5 s, completed Apr 13, 2016 6:59:37 PM
 ```
-If you see the above then 
+If you see the above then...
 ### It worked!
 You are ready to go. We have a few recommended practices
 * Use packages and following conventions for [structure](http://www.scala-sbt.org/0.13/docs/Directories.html) and [naming](http://docs.scala-lang.org/style/naming-conventions.html)
 * Package names should be clearly reflected in the testing hierarchy
-* Build tests for what you do.
+* Build tests for all your work.
  * This template includes a dependency on the Chisel3 HWIOTesters, this is a reasonable starting point for most tests
- * You can remove this dependency in the build.sbt file if necessaru
+ * You can remove this dependency in the build.sbt file if necessary
+
  
