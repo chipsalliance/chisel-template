@@ -2,6 +2,8 @@
 
 package example
 
+import Chisel._
+
 class GCD extends Module {
   val io = new Bundle {
     val a  = UInt(INPUT,  16)

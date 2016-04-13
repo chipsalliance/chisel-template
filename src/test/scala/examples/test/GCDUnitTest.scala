@@ -2,6 +2,10 @@
 
 package examples.test
 
+import Chisel._
+import Chisel.hwiotesters.{ChiselFlatSpec, SteppedHWIOTester}
+import example.GCD
+
 class GCDUnitTester extends SteppedHWIOTester {
   def computeGcd(a: Int, b: Int): (Int, Int) = {
     var x = a
