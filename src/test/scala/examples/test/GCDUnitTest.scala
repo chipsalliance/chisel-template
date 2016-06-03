@@ -2,11 +2,11 @@
 
 package examples.test
 
-import Chisel._
-import Chisel.iotesters.{ChiselFlatSpec, SteppedHWIOTester}
+import Chisel.iotesters._
 import example.GCD
+import org.scalatest.Matchers
 
-class GCDUnitTester extends SteppedHWIOTester {
+class GCDUnitTester(c: GCD, b: Option[Backend] = None) extends PeekPokeTester(c, _backend=b) {
   /**
     * compute the gcd and the number of steps it should take to do it
     *
@@ -30,11 +30,10 @@ class GCDUnitTester extends SteppedHWIOTester {
     (x, depth)
   }
 
-  val device_under_test = Module(new GCD)
-  val gcd = device_under_test
+  val gcd = c
 
   for(i <- 1 to 100) {
-    for(j <- 1 to 100) {
+    for (j <- 1 to 100) {
       val (a, b, z) = (64, 48, 16)
 
       poke(gcd.io.a, a)
@@ -49,10 +48,13 @@ class GCDUnitTester extends SteppedHWIOTester {
       expect(gcd.io.z, expected_gcd)
       expect(gcd.io.v, 1)
     }
+  }
 }
 
-class GCDTester extends ChiselFlatSpec {
-  "GCD circuit" should "compute the correct greatest common denominator" in {
-    assertTesterPasses { new GCDUnitTester }
+class GCDTester extends ChiselFlatSpec with Matchers {
+  "GCD" should "calculate proper greatest common denominator" in {
+    runPeekPokeTester(() => new GCD) {
+      (c, b) => new GCDUnitTester(c, b)
+    } should be (true)
   }
 }
