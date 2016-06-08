@@ -2,13 +2,23 @@ name := "chisel-module-template"
 
 version := "1.0"
 
-val chiselVersion = System.getProperty("chiselVersion", "3.0")
-
 scalaVersion := "2.11.7"
 
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("snapshots"),
+  Resolver.sonatypeRepo("releases")
+)
+
+// Provide a managed dependency on X if -DXVersion="" is supplied on the command line.
+val defaultVersions = Map(
+  "chisel3" -> "3.0-BETA-SNAPSHOT",
+  "chisel-iotesters" -> "1.1-BETA-SNAPSHOT"
+  )
+
+libraryDependencies ++= (Seq("chisel3","chisel-iotesters").map {
+  dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) })
+
 libraryDependencies ++= Seq(
-  "edu.berkeley.cs" %% "chisel3" % chiselVersion,
-  "edu.berkeley.cs" %% "chisel-iotesters" % "1.0",
-  "org.scalatest" % "scalatest_2.11" % "2.2.4",
+  "org.scalatest" %% "scalatest" % "2.2.5",
   "org.scalacheck" %% "scalacheck" % "1.12.4")
 

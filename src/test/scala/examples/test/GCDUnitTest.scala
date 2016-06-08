@@ -3,7 +3,7 @@
 package examples.test
 
 import Chisel._
-import Chisel.hwiotesters.{ChiselFlatSpec, SteppedHWIOTester}
+import Chisel.iotesters.{ChiselFlatSpec, SteppedHWIOTester}
 import example.GCD
 
 class GCDUnitTester extends SteppedHWIOTester {
