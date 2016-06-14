@@ -2,11 +2,18 @@
 
 package examples.test
 
-import Chisel._
-import Chisel.hwiotesters.{ChiselFlatSpec, SteppedHWIOTester}
+import Chisel.iotesters._
 import example.GCD
+import org.scalatest.Matchers
 
-class GCDUnitTester extends SteppedHWIOTester {
+class GCDUnitTester(c: GCD, b: Option[Backend] = None) extends PeekPokeTester(c, _backend=b) {
+  /**
+    * compute the gcd and the number of steps it should take to do it
+    *
+    * @param a positive integer
+    * @param b positive integer
+    * @return the GCD of a and b
+    */
   def computeGcd(a: Int, b: Int): (Int, Int) = {
     var x = a
     var y = b
@@ -23,25 +30,31 @@ class GCDUnitTester extends SteppedHWIOTester {
     (x, depth)
   }
 
-  val (a, b, z) = (64, 48, 16)
-  val device_under_test = Module(new GCD)
-  val gcd = device_under_test
+  val gcd = c
 
-  poke(gcd.io.a, a)
-  poke(gcd.io.b, b)
-  poke(gcd.io.e, 1)
-  step(1)
-  poke(gcd.io.e, 0)
+  for(i <- 1 to 100) {
+    for (j <- 1 to 100) {
+      val (a, b, z) = (64, 48, 16)
 
-  val (expected_gcd, steps) = computeGcd(a, b)
+      poke(gcd.io.a, a)
+      poke(gcd.io.b, b)
+      poke(gcd.io.e, 1)
+      step(1)
+      poke(gcd.io.e, 0)
 
-  step(steps - 1) // -1 is because we step(1) already to toggle the enable
-  expect(gcd.io.z, expected_gcd)
-  expect(gcd.io.v, 1)
+      val (expected_gcd, steps) = computeGcd(a, b)
+
+      step(steps - 1) // -1 is because we step(1) already to toggle the enable
+      expect(gcd.io.z, expected_gcd)
+      expect(gcd.io.v, 1)
+    }
+  }
 }
 
-class GCDTester extends ChiselFlatSpec {
-  "a" should "b" in {
-    assertTesterPasses { new GCDUnitTester }
+class GCDTester extends ChiselFlatSpec with Matchers {
+  "GCD" should "calculate proper greatest common denominator" in {
+    runPeekPokeTester(() => new GCD) {
+      (c, b) => new GCDUnitTester(c, b)
+    } should be (true)
   }
 }

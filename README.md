@@ -34,28 +34,32 @@ sbt test
 ```
 You should see a whole bunch of output that ends with the following lines
 ```
-Simulation completed at time 62 (cycle 6)
-[info] GCDTester:
-[info] a
-[info] - should b
+STEP 49996 -> 50000
+  EXPECT io_z -> 0x10 == 0x10 PASS
+  EXPECT io_v -> 0x1 == 0x1 PASS
+RAN 50000 CYCLES PASSED[info] GCDTester:
+[info] GCD
+[info] - should calculate proper greatest common denominator
 [info] ScalaCheck
 [info] Passed: Total 0, Failed 0, Errors 0, Passed 0
 [info] ScalaTest
-[info] Run completed in 4 seconds, 23 milliseconds.
+[info] Run completed in 3 seconds, 294 milliseconds.
 [info] Total number of tests run: 1
 [info] Suites: completed 1, aborted 0
 [info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [info] Passed: Total 1, Failed 0, Errors 0, Passed 1
-[success] Total time: 5 s, completed Apr 13, 2016 6:59:37 PM
+[success] Total time: 8 s, completed Jun 3, 2016 5:50:46 AM
 ```
 If you see the above then...
 ### It worked!
-You are ready to go. We have a few recommended practices
+You are ready to go. We have a few recommended practices and things to do.
 * Use packages and following conventions for [structure](http://www.scala-sbt.org/0.13/docs/Directories.html) and [naming](http://docs.scala-lang.org/style/naming-conventions.html)
 * Package names should be clearly reflected in the testing hierarchy
 * Build tests for all your work.
- * This template includes a dependency on the Chisel3 HWIOTesters, this is a reasonable starting point for most tests
+ * This template includes a dependency on the Chisel3 IOTesters, this is a reasonable starting point for most tests
  * You can remove this dependency in the build.sbt file if necessary
+* Change the name of your project in the build.sbt
+* Change your README.md
 
  
