@@ -37,7 +37,8 @@ You should see a whole bunch of output that ends with the following lines
 STEP 49996 -> 50000
   EXPECT io_z -> 0x10 == 0x10 PASS
   EXPECT io_v -> 0x1 == 0x1 PASS
-RAN 50000 CYCLES PASSED[info] GCDTester:
+RAN 50000 CYCLES PASSED
+[info] GCDTester:
 [info] GCD
 [info] - should calculate proper greatest common denominator
 [info] ScalaCheck
@@ -61,5 +62,3 @@ You are ready to go. We have a few recommended practices and things to do.
  * You can remove this dependency in the build.sbt file if necessary
 * Change the name of your project in the build.sbt
 * Change your README.md
-
- 
