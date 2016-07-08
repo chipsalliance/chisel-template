@@ -12,7 +12,7 @@ The first thing you want to do is clone this repo into a directory of your own. 
 mkdir ~/ChiselProjects
 cd ~/ChiselProjects
 
-git clone https://github.com/ucb-bar/chisel-tutorial.git MyChiselProject
+git clone https://github.com/ucb-bar/chisel-template.git MyChiselProject
 cd MyChiselProject
 ```
 ### Make your project into a fresh git repo
