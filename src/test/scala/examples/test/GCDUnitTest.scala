@@ -2,11 +2,10 @@
 
 package examples.test
 
-import Chisel.iotesters._
+import Chisel.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import example.GCD
-import org.scalatest.Matchers
 
-class GCDUnitTester(c: GCD, b: Option[Backend] = None) extends PeekPokeTester(c, _backend=b) {
+class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   /**
     * compute the gcd and the number of steps it should take to do it
     *
@@ -32,8 +31,8 @@ class GCDUnitTester(c: GCD, b: Option[Backend] = None) extends PeekPokeTester(c,
 
   val gcd = c
 
-  for(i <- 1 to 100) {
-    for (j <- 1 to 100) {
+  for(i <- 1 to 10) {
+    for (j <- 1 to 10) {
       val (a, b, z) = (64, 48, 16)
 
       poke(gcd.io.a, a)
@@ -51,10 +50,13 @@ class GCDUnitTester(c: GCD, b: Option[Backend] = None) extends PeekPokeTester(c,
   }
 }
 
-class GCDTester extends ChiselFlatSpec with Matchers {
-  "GCD" should "calculate proper greatest common denominator" in {
-    runPeekPokeTester(() => new GCD) {
-      (c, b) => new GCDUnitTester(c, b)
-    } should be (true)
+class GCDTester extends ChiselFlatSpec {
+  val backendNames = Array[String]("firrtl", "verilator")
+  for ( backendName <- backendNames ) {
+    "GCD" should s"calculate proper greatest common denominator (with ${backendName})" in {
+      Driver(() => new GCD, backendName) {
+        c => new GCDUnitTester(c)
+      } should be (true)
+    }
   }
 }
