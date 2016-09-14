@@ -62,3 +62,9 @@ You are ready to go. We have a few recommended practices and things to do.
  * You can remove this dependency in the build.sbt file if necessary
 * Change the name of your project in the build.sbt
 * Change your README.md
+
+## Development/Bug Fixes
+This is the release version of chisel-template. If you have bug fixes or
+changes you would like to see incorporated in this repo, please checkout
+the master branch and submit pull requests against it.
+
