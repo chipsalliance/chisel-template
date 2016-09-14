@@ -1,6 +1,6 @@
 name := "chisel-module-template"
 
-version := "1.1-SNAPSHOT"
+version := "1.0"
 
 scalaVersion := "2.11.7"
 
@@ -11,8 +11,8 @@ resolvers ++= Seq(
 
 // Provide a managed dependency on X if -DXVersion="" is supplied on the command line.
 val defaultVersions = Map(
-  "chisel3" -> "3.1-SNAPSHOT",
-  "chisel-iotesters" -> "1.2-SNAPSHOT"
+  "chisel3" -> "3.0-BETA-SNAPSHOT",
+  "chisel-iotesters" -> "1.1-BETA-SNAPSHOT"
   )
 
 libraryDependencies ++= (Seq("chisel3","chisel-iotesters").map {
