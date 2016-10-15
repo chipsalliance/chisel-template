@@ -31,17 +31,16 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
 
   val gcd = c
 
-  for(i <- 1 to 10) {
-    for (j <- 1 to 10) {
-      val (a, b, z) = (64, 48, 16)
+  for(i <- 1 to 40 by 3) {
+    for (j <- 1 to 40 by 7) {
 
-      poke(gcd.io.a, a)
-      poke(gcd.io.b, b)
+      poke(gcd.io.a, i)
+      poke(gcd.io.b, j)
       poke(gcd.io.e, 1)
       step(1)
       poke(gcd.io.e, 0)
 
-      val (expected_gcd, steps) = computeGcd(a, b)
+      val (expected_gcd, steps) = computeGcd(i, j)
 
       step(steps - 1) // -1 is because we step(1) already to toggle the enable
       expect(gcd.io.z, expected_gcd)
@@ -53,7 +52,7 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
 class GCDTester extends ChiselFlatSpec {
   val backendNames = Array[String]("firrtl", "verilator")
   for ( backendName <- backendNames ) {
-    "GCD" should s"calculate proper greatest common denominator (with ${backendName})" in {
+    "GCD" should s"calculate proper greatest common denominator (with $backendName)" in {
       Driver(() => new GCD, backendName) {
         c => new GCDUnitTester(c)
       } should be (true)
