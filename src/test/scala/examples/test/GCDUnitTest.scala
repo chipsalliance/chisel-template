@@ -29,7 +29,7 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
     (x, depth)
   }
 
-  val gcd = c
+  private val gcd = c
 
   for(i <- 1 to 40 by 3) {
     for (j <- 1 to 40 by 7) {
@@ -50,7 +50,7 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
 }
 
 class GCDTester extends ChiselFlatSpec {
-  val backendNames = Array[String]("firrtl", "verilator")
+  private val backendNames = Array[String]("firrtl", "verilator")
   for ( backendName <- backendNames ) {
     "GCD" should s"calculate proper greatest common denominator (with $backendName)" in {
       Driver(() => new GCD, backendName) {
