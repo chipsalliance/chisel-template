@@ -32,25 +32,28 @@ So go for it, at the command line in the project root.
 ```sh
 sbt test
 ```
-You should see a whole bunch of output that ends with the following lines
+You should see a whole bunch of output that ends with something like the following lines
 ```
-STEP 49996 -> 50000
-  EXPECT io_z -> 0x10 == 0x10 PASS
-  EXPECT io_v -> 0x1 == 0x1 PASS
-RAN 50000 CYCLES PASSED
+STEP 1092 -> 1102
+  EXPECT GCD.io_z -> 0x4 == 0x4 PASS
+  EXPECT GCD.io_v -> 0x1 == 0x1 PASS
+Enabling waves..
+RAN 1102 CYCLES PASSED
 [info] GCDTester:
 [info] GCD
-[info] - should calculate proper greatest common denominator
+[info] - should calculate proper greatest common denominator (with firrtl)
+[info] GCD
+[info] - should calculate proper greatest common denominator (with verilator)
 [info] ScalaCheck
 [info] Passed: Total 0, Failed 0, Errors 0, Passed 0
 [info] ScalaTest
-[info] Run completed in 3 seconds, 294 milliseconds.
-[info] Total number of tests run: 1
+[info] Run completed in 2 seconds, 944 milliseconds.
+[info] Total number of tests run: 2
 [info] Suites: completed 1, aborted 0
-[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
-[info] Passed: Total 1, Failed 0, Errors 0, Passed 1
-[success] Total time: 8 s, completed Jun 3, 2016 5:50:46 AM
+[info] Passed: Total 2, Failed 0, Errors 0, Passed 2
+[success] Total time: 6 s, completed Oct 15, 2016 7:39:40 AM
 ```
 If you see the above then...
 ### It worked!
