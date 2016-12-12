@@ -59,6 +59,8 @@ lazy val root = (project in file (".")).
   dependsOn(firrtl).
   aggregate(firrtl, chisel, firrtl_interpreter, chisel_testers)
 
+buildInfoUsePackageAsPath := true
+
 publishArtifact in root := false
 
 publish in root := {}
