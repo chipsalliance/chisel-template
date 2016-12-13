@@ -1,6 +1,6 @@
 // See LICENSE for license details.
 
-package examples.test
+package example.test
 
 import Chisel.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import example.GCD
