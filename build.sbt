@@ -4,7 +4,7 @@ site.settings
 
 lazy val commonSettings = Seq (
   organization := "edu.berkeley.cs",
-  scalaVersion := "2.11.7",
+  scalaVersion := "2.11.8",
 
   resolvers ++= Seq(
     Resolver.sonatypeRepo("snapshots"),
