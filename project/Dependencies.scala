@@ -45,7 +45,8 @@ object Dependencies {
   //  there aren't any library dependencies, but if there were,
   //  they would be these:
   def chiselLibraryDependencies(name: String): Seq[ModuleID] = {
-    chiselDependencies(name) map { nameToModuleID(_) }
+  //  chiselDependencies(name) map { nameToModuleID(_) }
+  Seq()
   }
 
 }
