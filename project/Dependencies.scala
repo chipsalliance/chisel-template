@@ -43,10 +43,23 @@ object Dependencies {
 
   // Since we include the libraries as subprojects,
   //  there aren't any library dependencies, but if there were,
-  //  they would be these:
-  def chiselLibraryDependencies(name: String): Seq[ModuleID] = {
-  //  chiselDependencies(name) map { nameToModuleID(_) }
-  Seq()
+  //  they would be these.
+  // The optional argument is a classpath to check.
+  // Libraries appearing on that classpath will be skipped.
+  def chiselLibraryDependencies(name: String, optionClasspath: Option[String] = None): Seq[ModuleID] = {
+    if (true) {
+      Seq()
+    } else {
+      optionClasspath match {
+	case None =>
+	  chiselDependencies(name) map { nameToModuleID(_) }
+	case Some(classpath: String) =>
+	  chiselDependencies(name).collect {
+	    // If we have an unmanaged jar file on the classpath, assume we're to use that,
+	    case dep: String if !classpath.contains(s"$dep.jar") => nameToModuleID(dep)
+	  }
+      }
+    }
   }
 
 }
