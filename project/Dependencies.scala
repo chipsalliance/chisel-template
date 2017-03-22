@@ -5,7 +5,8 @@ object Dependencies {
   // The basic chisel dependencies.
   val chiselDependencies = collection.immutable.HashMap[String, Seq[String]](
     "chisel" -> Seq("firrtl"),
-    "chisel-testers" -> Seq("firrtl", "firrtl-interpreter"),
+    "chisel3" -> Seq("firrtl"),
+    "chisel-testers" -> Seq("firrtl", "firrtl-interpreter", "chisel3"),
     "firrtl" -> Seq(),
     "firrtl-interpreter" -> Seq("firrtl")
   )
@@ -14,6 +15,7 @@ object Dependencies {
   // These will be used to construct the project dependsOn() dependencies.
   lazy val subProjects = collection.immutable.HashMap[String, ProjectReference](
     "chisel" -> ChiselBuild.chisel,
+    "chisel3" -> ChiselBuild.chisel,
     "chisel-testers" -> ChiselBuild.chisel_testers,
     "firrtl" -> ChiselBuild.firrtl,
     "firrtl-interpreter" -> ChiselBuild.firrtl_interpreter
