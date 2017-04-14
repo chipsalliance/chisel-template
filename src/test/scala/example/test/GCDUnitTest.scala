@@ -2,7 +2,7 @@
 
 package example.test
 
-import Chisel.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
+import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import example.GCD
 
 class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
