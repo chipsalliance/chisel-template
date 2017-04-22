@@ -1,7 +1,9 @@
 import sbt._
 import Keys._
 
-object ChiselBuild extends Build {
+import Dependencies._
+
+object ChiselBuild extends Build with Subprojects {
 
   lazy val commonSettings = Seq (
     organization := "edu.berkeley.cs",
@@ -30,24 +32,4 @@ object ChiselBuild extends Build {
       }
     }
   )
-
-  lazy val chisel = (project in file("chisel3")).
-    settings(commonSettings: _*).
-    settings(publishSettings: _*).
-    dependsOn(firrtl)
-
-  lazy val chisel_testers = (project in file("chisel-testers")).
-    settings(commonSettings: _*).
-    settings(publishSettings: _*).
-    dependsOn(chisel, firrtl, firrtl_interpreter)
-
-  lazy val firrtl = (project in file("firrtl")).
-    settings(commonSettings: _*).
-    settings(publishSettings: _*)
-
-  lazy val firrtl_interpreter = (project in file("firrtl-interpreter")).
-    settings(commonSettings: _*).
-    settings(publishSettings: _*).
-    dependsOn(firrtl)
-
 }

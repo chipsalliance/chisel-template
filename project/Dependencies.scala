@@ -1,67 +1,69 @@
 import sbt._
 import Keys._
 
+import ChiselBuild._
+
 object Dependencies {
-  // The basic chisel dependencies.
-  val chiselDependencies = collection.immutable.HashMap[String, Seq[String]](
-    "chisel" -> Seq("firrtl"),
-    "chisel3" -> Seq("firrtl"),
-    "chisel-testers" -> Seq("firrtl", "firrtl-interpreter", "chisel3"),
-    "firrtl" -> Seq(),
-    "firrtl-interpreter" -> Seq("firrtl")
-  )
-
-  // A map from name (string) to project build definition.
-  // These will be used to construct the project dependsOn() dependencies.
-  lazy val subProjects = collection.immutable.HashMap[String, ProjectReference](
-    "chisel" -> ChiselBuild.chisel,
-    "chisel3" -> ChiselBuild.chisel,
-    "chisel-testers" -> ChiselBuild.chisel_testers,
-    "firrtl" -> ChiselBuild.firrtl,
-    "firrtl-interpreter" -> ChiselBuild.firrtl_interpreter
-  )
-
-  // For a given chisel project, return a sequence of project references,
-  //  suitable for use as an argument to dependsOn().
-  def chiselProjectDependencies(name: String): Seq[ClasspathDep[ProjectReference]] = {
-    (chiselDependencies(name) map {p: String => classpathDependency(subProjects(p))})
-  }
-
   // The following are the default development versions of chisel libraries,
   //  not the "release" versions.
-  val chiselDefaultVersions = Map(
-    "chisel" -> "3.1-SNAPSHOT",
+  val defaultVersions = collection.immutable.Map[String, String](
     "chisel3" -> "3.1-SNAPSHOT",
     "firrtl" -> "1.1-SNAPSHOT",
-    "firrtl-interpreter" -> "1.1-SNAPSHOT",
-    "chisel-testers" -> "1.2-SNAPSHOT"
-    )
+    "firrtl_interpreter" -> "1.1-SNAPSHOT",
+    "chisel_testers" -> "1.2-SNAPSHOT"
+  )
+
+  val versions = collection.mutable.Map[String, String](defaultVersions.toSeq: _*)
+
+  // The unmanaged classPath - jars found here will automatically satisfy libraryDependencies.
+  var unmanagedClasspath: Option[String] = None
+
+  case class PackageVersion(packageName: String, version: String) {
+    implicit def toStringTuple: Tuple2[String, String] = {
+      (packageName, version)
+    }
+  }
+
+  /** Set one or more of the BIG4 versions.
+    *
+    * @param package_versions package name and version
+    * @return map of prior name -> version.
+    */
+  def setVersions(package_versions: Seq[PackageVersion]): collection.immutable.Map[String, String] = {
+    // Return the old settings.
+    val ret = collection.immutable.Map[String, String](versions.toSeq: _*)
+    for (pv <- package_versions) {
+      versions(pv.packageName) = pv.version
+    }
+    ret
+  }
 
   // Give a module/project name, return the ModuleID
   // Provide a managed dependency on X if -DXVersion="" is supplied on the command line (via JAVA_OPTS).
   private def nameToModuleID(name: String): ModuleID = {
-    "edu.berkeley.cs" %% name % sys.props.getOrElse(name + "Version", chiselDefaultVersions(name))
+    "edu.berkeley.cs" %% name % sys.props.getOrElse(name + "Version", versions(name))
   }
 
-  // Since we include the libraries as subprojects,
-  //  there aren't any library dependencies, but if there were,
-  //  they would be these.
-  // The optional argument is a classpath to check.
-  // Libraries appearing on that classpath will be skipped.
-  def chiselLibraryDependencies(name: String, optionClasspath: Option[String] = None): Seq[ModuleID] = {
-    if (true) {
-      Seq()
-    } else {
-      optionClasspath match {
-	case None =>
-	  chiselDependencies(name) map { nameToModuleID(_) }
-	case Some(classpath: String) =>
-	  chiselDependencies(name).collect {
-	    // If we have an unmanaged jar file on the classpath, assume we're to use that,
-	    case dep: String if !classpath.contains(s"$dep.jar") => nameToModuleID(dep)
-	  }
+  // Chisel projects as library dependencies.
+  def chiselLibraryDependencies(name: String): Seq[ModuleID] = {
+    def unmanaged(dep: String): Boolean = {
+      unmanagedClasspath match {
+        case None => false
+        case Some(classpath: String) => classpath.contains(s"$dep.jar")
       }
     }
+
+    val result = basicDependencies(name).filterNot(dep => packageProjects.contains(dep) || unmanaged(dep)).map(nameToModuleID(_))
+    println(s"chiselLibraryDependencies: $name $result")
+    result
+  }
+
+  // For a given chisel project, return a sequence of project references,
+  //  suitable for use as an argument to dependsOn().
+  def chiselProjectDependencies(name: String): Seq[ClasspathDep[ProjectReference]] = {
+    val result = basicDependencies(name).filter(dep => packageProjects.contains(dep)).map { dep: String => classpathDependency(packageProjects(dep)) }
+    println(s"chiselProjectDependencies: $name $result")
+    result
   }
 
 }
