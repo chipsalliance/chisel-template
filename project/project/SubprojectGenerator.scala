@@ -7,7 +7,8 @@ object SubprojectGenerator {
   def generate(output: File, projects: Seq[PackageProject]): Seq[File] = {
     val subappsString = projects.map(_.packageName).mkString(",")
     val packageProjects: scala.collection.immutable.Set[String] = projects.map(_.packageName).toSet
-    println("SubprojectGenerator.generate: " + subappsString)
+
+    // Given a Chisel project, generate the sbt code to define it as a project.
     def projFromPackageProject(p: PackageProject) = {
       val clientSettings = p.settings.getOrElse(Seq())
       val id = p.packageName
@@ -25,7 +26,6 @@ object SubprojectGenerator {
     // For a given chisel project, return a sequence of project references,
     //  suitable for use as an argument to dependsOn().
     def chiselProjectDependencies(name: String): Seq[String] = {
-      println(s"SubprojectGenerator.generate.chiselProjectDependencies: $name")
       basicDependencies(name).filter(dep => packageProjects.contains(dep))
     }
 
@@ -50,8 +50,6 @@ object SubprojectGenerator {
 
     val outputFile = output / "Subprojects.scala"
 
-    println(outputFile.getAbsolutePath)
-
     IO.write(outputFile,source)
 
     Seq(outputFile)
@@ -59,14 +57,7 @@ object SubprojectGenerator {
 
 }
 
-object build extends Build {
-
-  lazy val dummySetting2 = settingKey[Int]("dummy key")
-  dummySetting2 := {
-    println("in SubprojectGenerator")
-    println("subProjectsSetting: " + subProjectsSetting.value)
-    2
-  }
+object SubprojectBuild extends Build {
 
   lazy val root = project.in(file(".")).settings(
     sourceGenerators in Compile <+= (sourceManaged in Compile, subProjectsSetting) map { (out, projectsSetting) =>

@@ -1,7 +1,6 @@
 package chiselBuild
 
 import sbt._
-import Keys._
 
 object ChiselDependencies {
 
@@ -67,10 +66,7 @@ object ChiselDependencies {
         case Some(classpath: String) => classpath.contains(s"$dep.jar")
       }
     }
-
-
     val result = basicDependencies(name).filterNot(dep => packageProjects.contains(dep) || unmanaged(dep)).map(nameToModuleID(_))
-    println(s"chiselLibraryDependencies: $name $result")
     result
   }
 
@@ -78,7 +74,6 @@ object ChiselDependencies {
   //  suitable for use as an argument to dependsOn().
   def chiselProjectDependencies(name: String): Seq[ClasspathDep[ProjectReference]] = {
     val result = basicDependencies(name).filter(dep => packageProjects.contains(dep)).map { dep: String => classpathDependency(packageProjects(dep)) }
-    println(s"chiselProjectDependencies: $name $result")
     result
   }
 }

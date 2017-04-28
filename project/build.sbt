@@ -1,5 +1,6 @@
 import chiselBuild.ChiselDependencies._
 
+// Share everything in the upper level project/chiselBuild directory between build and meta-build
 unmanagedSourceDirectories in Compile += baseDirectory.value / "chiselBuild"
 
 subProjectsSetting := Seq(
@@ -8,9 +9,3 @@ subProjectsSetting := Seq(
   PackageProject("chisel3"),
   PackageProject("chisel_testers", Some(file("chisel-testers")))
 )
-lazy val dummySetting = settingKey[Int]("dummy key")
-dummySetting := {
-  println("in project/build.sbt")
-  println("subProjectsSetting: " + subProjectsSetting.value)
-  0
-}
