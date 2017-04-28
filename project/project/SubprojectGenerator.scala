@@ -16,7 +16,7 @@ object SubprojectGenerator {
       val projectDependenciesString = chiselProjectDependencies(id).mkString(", ")
       s"""
         |    lazy val $id = (project in file(\"$base\")).settings(
-        |      $clientSettings ++ ChiselBuild.commonSettings ++ ChiselBuild.publishSettings ++ Seq(
+        |      $clientSettings ++ ChiselProjectBuild.commonSettings ++ ChiselProjectBuild.publishSettings ++ Seq(
         |        libraryDependencies ++= chiselLibraryDependencies("$id")
         |      )
         |    ).dependsOn($projectDependenciesString)
@@ -34,7 +34,7 @@ object SubprojectGenerator {
     val source = s"""
         |import sbt._
         |import Keys._
-        |import ChiselBuild._
+        |import ChiselProjectBuild._
         |import chiselBuild.ChiselDependencies._
         |
         |trait Subprojects {
