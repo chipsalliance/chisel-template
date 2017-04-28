@@ -4,6 +4,15 @@ import sbt._
 import Keys._
 
 object ChiselDependencies {
+
+  // The basic chisel dependencies.
+  val basicDependencies = collection.immutable.Map[String, Seq[String]](
+    "chisel3" -> Seq("firrtl"),
+    "chisel_testers" -> Seq("firrtl", "firrtl_interpreter", "chisel3"),
+    "firrtl" -> Seq(),
+    "firrtl_interpreter" -> Seq("firrtl")
+  )
+
   // The following are the default development versions of chisel libraries,
   //  not the "release" versions.
   val defaultVersions = collection.immutable.Map[String, String](
@@ -44,8 +53,10 @@ object ChiselDependencies {
     "edu.berkeley.cs" %% name % sys.props.getOrElse(name + "Version", versions(name))
   }
 
-  // Delete these
-  val basicDependencies = collection.immutable.Map[String, Seq[String]]()
+  case class PackageProject(packageName: String, base: Option[File] = None, settings: Option[Seq[Def.Setting[_]]] = None)
+
+  lazy val subProjectsSetting = settingKey[Seq[PackageProject]]("Subprojects to build")
+
   lazy val packageProjects = scala.collection.mutable.Map[String, ProjectReference]()
 
   // Chisel projects as library dependencies.
@@ -70,8 +81,4 @@ object ChiselDependencies {
     println(s"chiselProjectDependencies: $name $result")
     result
   }
-
-  case class PackageProject(packageName: String, base: Option[File] = None, settings: Option[Seq[Def.Setting[_]]] = None)
-
-  lazy val subProjectsSetting = settingKey[Seq[PackageProject]]("Subprojects to build")
 }

@@ -1,7 +1,6 @@
 import chiselBuild.ChiselDependencies._
 
 unmanagedSourceDirectories in Compile += baseDirectory.value / "chiselBuild"
-lazy val dummySetting = settingKey[Int]("dummy key")
 
 subProjectsSetting := Seq(
   PackageProject("firrtl"),
@@ -9,3 +8,9 @@ subProjectsSetting := Seq(
   PackageProject("chisel3"),
   PackageProject("chisel_testers", Some(file("chisel-testers")))
 )
+lazy val dummySetting = settingKey[Int]("dummy key")
+dummySetting := {
+  println("in project/build.sbt")
+  println("subProjectsSetting: " + subProjectsSetting.value)
+  0
+}

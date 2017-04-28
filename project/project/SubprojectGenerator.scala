@@ -1,8 +1,6 @@
 import sbt._
 import Keys._
-
-import chiselBuild.ChiselDependencies._
-import chiselBuild.ChiselProjects._
+import chiselBuild.ChiselDependencies.{subProjectsSetting, _}
 
 object SubprojectGenerator {
 
@@ -38,7 +36,7 @@ object SubprojectGenerator {
         |import sbt._
         |import Keys._
         |import ChiselBuild._
-        |import Dependencies._
+        |import chiselBuild.ChiselDependencies._
         |
         |trait Subprojects {
         |  this : Build =>
@@ -67,10 +65,16 @@ object SubprojectGenerator {
 
 object build extends Build {
 
+  lazy val dummySetting2 = settingKey[Int]("dummy key")
+  dummySetting2 := {
+    println("in SubprojectGenerator")
+    println("subProjectsSetting: " + subProjectsSetting.value)
+    2
+  }
+
   lazy val root = project.in(file(".")).settings(
-    sourceGenerators in Compile <+= (sourceManaged in Compile, subProjectsSetting in Compile) map { (out, subProjectsSetting) =>
-      SubprojectGenerator.generate(out, subProjectsSetting)
+    sourceGenerators in Compile <+= (sourceManaged in Compile, subProjectsSetting) map { (out, projectsSetting) =>
+      SubprojectGenerator.generate(out, projectsSetting)
     }
   )
-
 }

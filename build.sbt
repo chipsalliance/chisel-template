@@ -1,6 +1,6 @@
 // See LICENSE for license details.
 
-import ChiselBuild._
+import chiselBuild.ChiselDependencies._
 
 site.settings
 
@@ -12,8 +12,8 @@ buildInfoUsePackageAsPath := true
       publishLocal := {},
       publish := {},
       packagedArtifacts := Map.empty
-    )/*.
-    aggregate(ChiselBuild.packageProjects.values.toSeq: _*) */
+    ).
+    aggregate(packageProjects.values.toSeq: _*)
 
 publishArtifact in root := false
 
