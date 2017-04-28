@@ -34,6 +34,7 @@ object SubprojectGenerator {
     // For a given chisel project, return a sequence of project references,
     //  suitable for use as an argument to dependsOn().
     def chiselProjectDependencies(name: String): Seq[String] = {
+      println(s"SubprojectGenerator.generate.chiselProjectDependencies: $name")
       basicDependencies(name).filter(dep => packageProjects.contains(dep))
     }
 
