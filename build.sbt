@@ -12,8 +12,8 @@ buildInfoUsePackageAsPath := true
       publishLocal := {},
       publish := {},
       packagedArtifacts := Map.empty
-    ).
-    aggregate(ChiselBuild.packageProjects.values.toSeq: _*)
+    )/*.
+    aggregate(ChiselBuild.packageProjects.values.toSeq: _*) */
 
 publishArtifact in root := false
 

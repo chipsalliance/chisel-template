@@ -1,9 +1,9 @@
 import sbt._
 import Keys._
 
-import Dependencies._
+import chiselBuild.ChiselDependencies._
 
-object ChiselBuild extends Build with Subprojects {
+object ChiselBuild extends Build /* with Subprojects */ {
 
   lazy val commonSettings = Seq (
     organization := "edu.berkeley.cs",

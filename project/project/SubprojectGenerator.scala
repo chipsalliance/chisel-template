@@ -1,17 +1,10 @@
 import sbt._
 import Keys._
 
-import ChiselDependencies._
+import chiselBuild.ChiselDependencies._
+import chiselBuild.ChiselProjects._
 
 object SubprojectGenerator {
-
-  // The basic chisel dependencies.
-  val basicDependencies = collection.immutable.Map[String, Seq[String]](
-    "chisel3" -> Seq("firrtl"),
-    "chisel_testers" -> Seq("firrtl", "firrtl_interpreter", "chisel3"),
-    "firrtl" -> Seq(),
-    "firrtl_interpreter" -> Seq("firrtl")
-  )
 
   def generate(output: File, projects: Seq[PackageProject]): Seq[File] = {
     val subappsString = projects.map(_.packageName).mkString(",")
@@ -79,4 +72,5 @@ object build extends Build {
       SubprojectGenerator.generate(out, subProjectsSetting)
     }
   )
+
 }

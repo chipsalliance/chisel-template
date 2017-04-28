@@ -1,4 +1,7 @@
-import ChiselDependencies._
+import chiselBuild.ChiselDependencies._
+
+//unmanagedSourceDirectories in Compile += baseDirectory.value / "project" / "chiselBuild"
+unmanagedSourceDirectories in Compile += baseDirectory.value / "chiselBuild"
 
 lazy val dummySetting = settingKey[Int]("dummy key")
 
