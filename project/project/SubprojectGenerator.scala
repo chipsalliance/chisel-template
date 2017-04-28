@@ -29,7 +29,6 @@ object SubprojectGenerator {
       basicDependencies(name).filter(dep => packageProjects.contains(dep))
     }
 
-    val basicDependenciesString = basicDependencies.map { case (k, v) => s"""      ("$k" -> Seq(${v.map(e => "\"" + e + "\"").mkString(", ")}))"""}.mkString(",\n")
     val packageProjectsBuildString = projects.map(projFromPackageProject).mkString("\n")
     val packageProjectsInitString = projects.map( p => s"""      "${p.packageName}" -> ${p.packageName}""").mkString(",\n")
     val source = s"""
@@ -41,9 +40,6 @@ object SubprojectGenerator {
         |trait Subprojects {
         |  this : Build =>
         |
-        |    val basicDependencies = collection.immutable.Map[String, Seq[String]](
-        |$basicDependenciesString
-        |    )
         |$packageProjectsBuildString
         |
         |    lazy val packageProjects = scala.collection.mutable.Map[String, ProjectReference](
