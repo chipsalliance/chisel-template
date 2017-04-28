@@ -42,7 +42,7 @@ object SubprojectGenerator {
         |
         |$packageProjectsBuildString
         |
-        |    lazy val packageProjects = scala.collection.mutable.Map[String, ProjectReference](
+        |    packageProjects = scala.collection.mutable.Map[String, ProjectReference](
         |$packageProjectsInitString
         |    )
         |}

@@ -57,7 +57,7 @@ object ChiselDependencies {
 
   lazy val subProjectsSetting = settingKey[Seq[PackageProject]]("Subprojects to build")
 
-  lazy val packageProjects = scala.collection.mutable.Map[String, ProjectReference]()
+  var packageProjects = scala.collection.mutable.Map[String, ProjectReference]()
 
   // Chisel projects as library dependencies.
   def chiselLibraryDependencies(name: String): Seq[ModuleID] = {
