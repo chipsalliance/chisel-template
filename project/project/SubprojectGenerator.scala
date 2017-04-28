@@ -16,6 +16,7 @@ object SubprojectGenerator {
   def generate(output: File, projects: Seq[PackageProject]): Seq[File] = {
     val subappsString = projects.map(_.packageName).mkString(",")
     val packageProjects: scala.collection.immutable.Set[String] = projects.map(_.packageName).toSet
+    println("SubprojectGenerator.generate: " + subappsString)
     def projFromPackageProject(p: PackageProject) = {
       val clientSettings = p.settings.getOrElse(Seq())
       val id = p.packageName
