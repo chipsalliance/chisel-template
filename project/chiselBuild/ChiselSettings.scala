@@ -1,9 +1,10 @@
+package chiselBuild
+
 import sbt._
 import Keys._
 
-import chiselBuild.ChiselDependencies._
-
-object ChiselProjectBuild extends Build with Subprojects {
+// If you make changes here, you may need to update the SubprojectGenerator.
+object ChiselSettings {
 
   lazy val commonSettings = Seq (
     organization := "edu.berkeley.cs",
@@ -25,10 +26,10 @@ object ChiselProjectBuild extends Build with Subprojects {
     publishTo <<= version { v: String =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT")) {
-	Some("snapshots" at nexus + "content/repositories/snapshots")
+        Some("snapshots" at nexus + "content/repositories/snapshots")
       }
       else {
-	Some("releases" at nexus + "service/local/staging/deploy/maven2")
+        Some("releases" at nexus + "service/local/staging/deploy/maven2")
       }
     }
   )

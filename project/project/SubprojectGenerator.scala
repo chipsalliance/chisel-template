@@ -1,4 +1,5 @@
 import sbt._
+import chiselBuild.ChiselSettings  // Although we don't actually use this, our generate code does.
 import chiselBuild.ChiselDependencies.{PackageProject, basicDependencies}
 
 object SubprojectGenerator {
@@ -21,7 +22,7 @@ object SubprojectGenerator {
       val projectDependenciesString = projectDependencies(id).mkString(", ")
       s"""
         |    lazy val $id = (project in file(\"$base\")).settings(
-        |      $clientSettings ++ ChiselProjectBuild.commonSettings ++ ChiselProjectBuild.publishSettings ++ Seq(
+        |      $clientSettings ++ ChiselSettings.commonSettings ++ ChiselSettings.publishSettings ++ Seq(
         |        libraryDependencies ++= chiselLibraryDependencies("$id")
         |      )
         |    ).dependsOn($projectDependenciesString)
@@ -33,11 +34,10 @@ object SubprojectGenerator {
     val source = s"""
         |import sbt._
         |import Keys._
-        |import ChiselProjectBuild._
+        |import chiselBuild.ChiselSettings
         |import chiselBuild.ChiselDependencies._
         |
-        |trait Subprojects {
-        |  this : Build =>
+        |object SubprojectBuild extends Build {
         |
         |$packageProjectsBuildString
         |

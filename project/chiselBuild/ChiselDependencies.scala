@@ -2,6 +2,7 @@ package chiselBuild
 
 import sbt._
 
+// If you make changes here, you may need to update the SubprojectGenerator.
 object ChiselDependencies {
 
   // The basic chisel dependencies.
