@@ -60,8 +60,8 @@ object SubprojectGenerator {
 object SubprojectBuild extends Build {
 
   lazy val root = project.in(file(".")).settings(
-    sourceGenerators in Compile <+= (sourceManaged in Compile, subProjectsSetting) map { (out, projectsSetting) =>
-      SubprojectGenerator.generate(out, projectsSetting)
-    }
+    sourceGenerators in Compile += Def.task {
+      SubprojectGenerator.generate((sourceManaged in Compile).value, subProjectsSetting.value)
+    }.taskValue
   )
 }
