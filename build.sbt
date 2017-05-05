@@ -13,7 +13,7 @@ buildInfoUsePackageAsPath := true
       publish := {},
       packagedArtifacts := Map.empty
     ).
-    aggregate(packageProjects.values.toSeq: _*)
+    aggregate(packageProjectsMap.values.toSeq: _*)
 
 publishArtifact in root := false
 

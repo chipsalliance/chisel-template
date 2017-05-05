@@ -7,12 +7,18 @@ object SubprojectGenerator {
     val subappsString = projects.map(_.packageName).mkString(",")
     val packageProjects: scala.collection.immutable.Set[String] = projects.map(_.packageName).toSet
 
+    // For a given chisel project, return a sequence of project references,
+    //  suitable for use as an argument to dependsOn().
+    def projectDependencies(name: String): Seq[String] = {
+      basicDependencies(name).filter(dep => packageProjects.contains(dep))
+    }
+
     // Given a Chisel project, generate the sbt code to define it as a project.
     def projFromPackageProject(p: PackageProject) = {
       val clientSettings = p.settings.getOrElse(Seq())
       val id = p.packageName
       val base = p.base.getOrElse(file(id)).name
-      val projectDependenciesString = chiselProjectDependencies(id).mkString(", ")
+      val projectDependenciesString = projectDependencies(id).mkString(", ")
       s"""
         |    lazy val $id = (project in file(\"$base\")).settings(
         |      $clientSettings ++ ChiselProjectBuild.commonSettings ++ ChiselProjectBuild.publishSettings ++ Seq(
@@ -20,12 +26,6 @@ object SubprojectGenerator {
         |      )
         |    ).dependsOn($projectDependenciesString)
         |""".stripMargin
-    }
-
-    // For a given chisel project, return a sequence of project references,
-    //  suitable for use as an argument to dependsOn().
-    def chiselProjectDependencies(name: String): Seq[String] = {
-      basicDependencies(name).filter(dep => packageProjects.contains(dep))
     }
 
     val packageProjectsBuildString = projects.map(projFromPackageProject).mkString("\n")
@@ -41,13 +41,15 @@ object SubprojectGenerator {
         |
         |$packageProjectsBuildString
         |
-        |    packageProjects = scala.collection.mutable.Map[String, ProjectReference](
+        |    packageProjectsMap = scala.collection.immutable.Map[String, ProjectReference](
         |$packageProjectsInitString
         |    )
         |}
         |""".stripMargin
 
     val outputFile = output / "Subprojects.scala"
+
+    println("generate: " + outputFile.getPath)
 
     IO.write(outputFile,source)
 
