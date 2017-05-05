@@ -1,6 +1,5 @@
 import sbt._
-import Keys._
-import chiselBuild.ChiselDependencies.{subProjectsSetting, _}
+import chiselBuild.ChiselDependencies.{PackageProject, basicDependencies}
 
 object SubprojectGenerator {
 
@@ -55,13 +54,4 @@ object SubprojectGenerator {
     Seq(outputFile)
   }
 
-}
-
-object SubprojectBuild extends Build {
-
-  lazy val root = project.in(file(".")).settings(
-    sourceGenerators in Compile += Def.task {
-      SubprojectGenerator.generate((sourceManaged in Compile).value, subProjectsSetting.value)
-    }.taskValue
-  )
 }
