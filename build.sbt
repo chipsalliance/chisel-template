@@ -1,11 +1,10 @@
 // See LICENSE for license details.
 
-import chiselBuild.{ChiselDependencies, ChiselSettings}
+import chiselBuild.ChiselDependencies
 
 site.settings
 
 lazy val root = (project in file (".")).
-  settings(ChiselSettings.commonSettings: _*).
   settings(
     publishLocal := {},
     publish := {},
