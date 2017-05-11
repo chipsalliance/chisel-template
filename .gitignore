@@ -1,7 +1,0 @@
-.classpath
-.idea
-.project
-.settings
-ivy_*.xml
-target/
-test_run_dir/
