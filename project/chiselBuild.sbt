@@ -7,5 +7,5 @@ subProjectsSetting := Seq(
   PackageProject("firrtl"),
   PackageProject("firrtl-interpreter", Some(file("firrtl-interpreter"))),
   PackageProject("chisel3"),
-  PackageProject("chisel-testers", Some(file("chisel-testers")))
+  PackageProject("chisel-iotesters", Some(file("chisel-testers")))
 )
