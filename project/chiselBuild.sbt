@@ -5,7 +5,7 @@ unmanagedSourceDirectories in Compile += baseDirectory.value / "chiselBuild"
 
 subProjectsSetting := Seq(
   PackageProject("firrtl"),
-  PackageProject("firrtl_interpreter", Some(file("firrtl-interpreter"))),
+  PackageProject("firrtl-interpreter", Some(file("firrtl-interpreter"))),
   PackageProject("chisel3"),
-  PackageProject("chisel_testers", Some(file("chisel-testers")))
+  PackageProject("chisel-testers", Some(file("chisel-testers")))
 )

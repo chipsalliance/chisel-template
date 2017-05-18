@@ -1,5 +1,5 @@
 import sbt._
-import chiselBuild.ChiselSettings  // Although we don't actually use this, our generate code does.
+import chiselBuild.ChiselSettings
 import chiselBuild.ChiselDependencies.{PackageProject, basicDependencies}
 
 object SubprojectGenerator {
@@ -18,19 +18,20 @@ object SubprojectGenerator {
     def projFromPackageProject(p: PackageProject) = {
       val clientSettings = p.settings.getOrElse(Seq())
       val id = p.packageName
+      val safeId = ChiselSettings.safeScalaIdentifier(id)
       val base = p.base.getOrElse(file(id)).name
       val projectDependenciesString = projectDependencies(id).mkString(", ")
       s"""
-        |    lazy val $id = (project in file(\"$base\")).settings(
+        |    lazy val $safeId = (project in file(\"$base\")).settings(
         |      $clientSettings ++ ChiselSettings.commonSettings ++ ChiselSettings.publishSettings ++ Seq(
-        |        libraryDependencies ++= chiselLibraryDependencies("$id")
+        |        libraryDependencies ++= chiselLibraryDependencies(Seq("$id"))
         |      )
         |    ).dependsOn($projectDependenciesString)
         |""".stripMargin
     }
 
     val packageProjectsBuildString = projects.map(projFromPackageProject).mkString("\n")
-    val packageProjectsInitString = projects.map( p => s"""      "${p.packageName}" -> ${p.packageName}""").mkString(",\n")
+    val packageProjectsInitString = projects.map( p => s"""      "${p.packageName}" -> ${ChiselSettings.safeScalaIdentifier(p.packageName)}""").mkString(",\n")
     val source = s"""
         |import sbt._
         |import Keys._
