@@ -69,7 +69,6 @@ object ChiselDependencies {
         case Some(classpath: String) => classpath.contains(s"$dep.jar")
       }
     }
-    println(names.filterNot(dep => packageProjectsMap.contains(dep) || unmanaged(dep)).mkString(", "))
     val result = names.filterNot(dep => packageProjectsMap.contains(dep) || unmanaged(dep)).map(nameToModuleID(_))
     result
   }

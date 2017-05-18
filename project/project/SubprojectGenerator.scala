@@ -20,7 +20,7 @@ object SubprojectGenerator {
       val id = p.packageName
       val safeId = ChiselSettings.safeScalaIdentifier(id)
       val base = p.base.getOrElse(file(id)).name
-      val projectDependenciesString = projectDependencies(id).mkString(", ")
+      val projectDependenciesString = projectDependencies(id).map(ChiselSettings.safeScalaIdentifier(_)).mkString(", ")
       s"""
         |    lazy val $safeId = (project in file(\"$base\")).settings(
         |      $clientSettings ++ ChiselSettings.commonSettings ++ ChiselSettings.publishSettings ++ Seq(
