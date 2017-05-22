@@ -1,17 +1,26 @@
-// See LICENSE for license details.
-
 import chiselBuild.ChiselDependencies
 
-site.settings
+name := "skeleton"
 
-lazy val root = (project in file (".")).
-  settings(
-    publishLocal := {},
-    publish := {},
-    packagedArtifacts := Map.empty
-  ).
-  aggregate(ChiselDependencies.packageProjectsMap.values.toSeq: _*)
+version := "1.0"
 
-publishArtifact in root := false
+scalaVersion := "2.11.8"
 
-publish in root := {}
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("snapshots"),
+  Resolver.sonatypeRepo("releases")
+)
+
+// The Chisel projects we know we'll require.
+// This could be any (or all) of the BIG4 projects
+// NOTE: The names used here must match the names set in the relevent project's
+//  build.sbt file.
+val chiselPackages: Seq[String] = Seq("chisel3", "chisel-iotesters")
+
+libraryDependencies ++= ChiselDependencies.chiselLibraryDependencies(chiselPackages)
+
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.2.6",
+  "org.scalacheck" %% "scalacheck" % "1.12.6")
+
+lazy val skeleton = (project in file(".")).dependsOn(ChiselDependencies.chiselProjectDependencies():_ *)
