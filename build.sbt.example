@@ -4,7 +4,7 @@ name := "skeleton"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.11"
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots"),
@@ -20,7 +20,7 @@ val chiselPackages: Seq[String] = Seq("chisel3", "chisel-iotesters")
 libraryDependencies ++= ChiselDependencies.chiselLibraryDependencies(chiselPackages)
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.6",
-  "org.scalacheck" %% "scalacheck" % "1.12.6")
+  "org.scalatest" %% "scalatest" % "3.0.1",
+  "org.scalacheck" %% "scalacheck" % "1.13.4")
 
 lazy val skeleton = (project in file(".")).dependsOn(ChiselDependencies.chiselProjectDependencies():_ *)
