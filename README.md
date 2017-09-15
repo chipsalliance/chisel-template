@@ -22,12 +22,18 @@ There may be more elegant way to do it, but the following works for me. **Note:*
 rm -rf .git
 git init
 git add .gitignore *
+```
+Use your favorite text editor to change the first line of the **build.sbt** file
+(it ships as ```name := "chisel-module-template"```) to correspond 
+to your project.<br/>
+Perhaps as ```name := "my-chisel-project"```
+```
 git commit -m 'Starting MyChiselProject'
 ```
 Connecting this up to github or some other remote host is an exercise left to the reader.
+
 ### Did it work?
-You should now have a project based on Chisel3 that can be run.  **Note:** With a nod to cargo cult thinking, some believe 
-it is best to execute the following sbt before opening up this directory in your IDE. I have no formal proof of this assertion.
+You should now have a project based on Chisel3 that can be run.<br/>
 So go for it, at the command line in the project root.
 ```sh
 sbt test
