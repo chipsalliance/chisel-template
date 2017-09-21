@@ -1,6 +1,6 @@
 // See LICENSE for license details.
 
-package example
+package gcd
 
 import chisel3._
 

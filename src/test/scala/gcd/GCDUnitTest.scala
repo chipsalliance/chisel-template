@@ -1,10 +1,9 @@
 // See LICENSE for license details.
 
-package example.test
+package gcd
 
 import chisel3.iotesters
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
-import example.GCD
 
 class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   /**
@@ -61,7 +60,12 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   * }}}
   */
 class GCDTester extends ChiselFlatSpec {
-  private val backendNames = Array[String]("firrtl", "verilator")
+  private val backendNames = if(firrtl.FileUtils.isCommandAvailable("verilator")) {
+    Array("firrtl", "verilator")
+  }
+  else {
+    Array("firrtl")
+  }
   for ( backendName <- backendNames ) {
     "GCD" should s"calculate proper greatest common denominator (with $backendName)" in {
       Driver(() => new GCD, backendName) {
@@ -70,16 +74,24 @@ class GCDTester extends ChiselFlatSpec {
     }
   }
 
-  "using Driver.execute" should "be an alternative way to run specification" in {
+  "Basic test using Driver.execute" should "be used as an alternative way to run specification" in {
     iotesters.Driver.execute(Array(), () => new GCD) {
       c => new GCDUnitTester(c)
     } should be (true)
   }
 
   "using --backend-name verilator" should "be an alternative way to run using verilator" in {
-    iotesters.Driver.execute(Array("--backend-name", "verilator"), () => new GCD) {
-      c => new GCDUnitTester(c)
-    } should be (true)
+    if(backendNames.contains("verilator")) {
+      iotesters.Driver.execute(Array("--backend-name", "verilator"), () => new GCD) {
+        c => new GCDUnitTester(c)
+      } should be(true)
+    }
+  }
+
+  "running with --is-verbose creats a lot" should "show more about what's going on in your tester" in {
+      iotesters.Driver.execute(Array("--is-verbose"), () => new GCD) {
+        c => new GCDUnitTester(c)
+      } should be(true)
   }
 
   "using --help" should s"show the many options available" in {
