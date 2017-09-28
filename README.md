@@ -18,15 +18,24 @@ cd MyChiselProject
 ### Make your project into a fresh git repo
 There may be more elegant way to do it, but the following works for me. **Note:** this project comes with a magnificent 339 line (at this writing) .gitignore file.
  You may want to edit that first in case we missed something, whack away at it, or start it from scratch.
+ 
+#### Clear out the old git stuff 
 ```sh
 rm -rf .git
 git init
 git add .gitignore *
 ```
+
+#### Rename project in build.sbt file
 Use your favorite text editor to change the first line of the **build.sbt** file
 (it ships as ```name := "chisel-module-template"```) to correspond 
 to your project.<br/>
 Perhaps as ```name := "my-chisel-project"```
+
+#### Clean up the README.md file
+Again use you editor of choice to make the README specific to your project
+
+#### Commit your changes
 ```
 git commit -m 'Starting MyChiselProject'
 ```
@@ -36,30 +45,32 @@ Connecting this up to github or some other remote host is an exercise left to th
 You should now have a project based on Chisel3 that can be run.<br/>
 So go for it, at the command line in the project root.
 ```sh
-sbt test
+sbt 'testOnly gcd.GCDTester -- -z Basic'
 ```
+>This tells the test harness to only run the test in GCDTester that contains the word Basic
+There are a number of other examples of ways to run tests in there, but we just want to see that
+one works.
+
 You should see a whole bunch of output that ends with something like the following lines
 ```
-STEP 1092 -> 1102
-  EXPECT GCD.io_z -> 0x4 == 0x4 PASS
-  EXPECT GCD.io_v -> 0x1 == 0x1 PASS
-Enabling waves..
-RAN 1102 CYCLES PASSED
-[info] GCDTester:
+[info] [0.001] SEED 1506028591907
+test GCD Success: 168 tests passed in 1107 cycles taking 0.203969 seconds
+[info] [0.191] RAN 1102 CYCLES PASSED[info] GCDTester:
 [info] GCD
-[info] - should calculate proper greatest common denominator (with firrtl)
 [info] GCD
-[info] - should calculate proper greatest common denominator (with verilator)
-[info] ScalaCheck
-[info] Passed: Total 0, Failed 0, Errors 0, Passed 0
+[info] Basic test using Driver.execute
+[info] - should be an alternative way to run specification
+[info] using --backend-name verilator
+[info] running with --is-verbose creats a lot
+[info] using --help
 [info] ScalaTest
-[info] Run completed in 2 seconds, 944 milliseconds.
-[info] Total number of tests run: 2
+[info] Run completed in 1 second, 642 milliseconds.
+[info] Total number of tests run: 1
 [info] Suites: completed 1, aborted 0
-[info] Tests: succeeded 2, failed 0, canceled 0, ignored 0, pending 0
+[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
-[info] Passed: Total 2, Failed 0, Errors 0, Passed 2
-[success] Total time: 6 s, completed Oct 15, 2016 7:39:40 AM
+[info] Passed: Total 1, Failed 0, Errors 0, Passed 1
+[success] Total time: 2 s, completed Sep 21, 2017 9:12:47 PM
 ```
 If you see the above then...
 ### It worked!
