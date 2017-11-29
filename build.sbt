@@ -26,7 +26,7 @@ def javacOptionsVersion(scalaVersion: String): Seq[String] = {
 
 name := "chisel-module-template"
 
-version := "1.0"
+version := "3.0"
 
 scalaVersion := "2.11.11"
 
@@ -39,8 +39,8 @@ resolvers ++= Seq(
 
 // Provide a managed dependency on X if -DXVersion="" is supplied on the command line.
 val defaultVersions = Map(
-  "chisel3" -> "3.0.0-RC1",
-  "chisel-iotesters" -> "1.1.0-RC1"
+  "chisel3" -> "3.0.+",
+  "chisel-iotesters" -> "1.1.+"
   )
 
 libraryDependencies ++= (Seq("chisel3","chisel-iotesters").map {
