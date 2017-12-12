@@ -88,10 +88,16 @@ class GCDTester extends ChiselFlatSpec {
     }
   }
 
-  "running with --is-verbose creats a lot" should "show more about what's going on in your tester" in {
-      iotesters.Driver.execute(Array("--is-verbose"), () => new GCD) {
-        c => new GCDUnitTester(c)
-      } should be(true)
+  "running with --is-verbose" should "show more about what's going on in your tester" in {
+    iotesters.Driver.execute(Array("--is-verbose"), () => new GCD) {
+      c => new GCDUnitTester(c)
+    } should be(true)
+  }
+
+  "running with --fint-write-vcd" should "create a vcd file from your test" in {
+    iotesters.Driver.execute(Array("--fint-write-vcd"), () => new GCD) {
+      c => new GCDUnitTester(c)
+    } should be(true)
   }
 
   "using --help" should s"show the many options available" in {
