@@ -19,9 +19,10 @@ cd MyChiselProject
 There may be more elegant way to do it, but the following works for me. **Note:** this project comes with a magnificent 339 line (at this writing) .gitignore file.
  You may want to edit that first in case we missed something, whack away at it, or start it from scratch.
  
-#### Clear out the old git stuff 
+#### Clear out the old git stuff and the LICENSE (you should add your own LICENSE)
 ```sh
 rm -rf .git
+rm -f LICENSE
 git init
 git add .gitignore *
 ```
