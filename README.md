@@ -19,10 +19,9 @@ cd MyChiselProject
 There may be more elegant way to do it, but the following works for me. **Note:** this project comes with a magnificent 339 line (at this writing) .gitignore file.
  You may want to edit that first in case we missed something, whack away at it, or start it from scratch.
  
-#### Clear out the old git stuff and the LICENSE (you should add your own LICENSE)
+#### Clear out the old git stuff
 ```sh
 rm -rf .git
-rm -f LICENSE
 git init
 git add .gitignore *
 ```
@@ -34,7 +33,8 @@ to your project.<br/>
 Perhaps as ```name := "my-chisel-project"```
 
 #### Clean up the README.md file
-Again use you editor of choice to make the README specific to your project
+Again use you editor of choice to make the README specific to your project.
+Be sure to update (or delete) the License section and add a LICENSE file of your own.
 
 #### Commit your changes
 ```
@@ -83,3 +83,29 @@ You are ready to go. We have a few recommended practices and things to do.
  * You can remove this dependency in the build.sbt file if necessary
 * Change the name of your project in the build.sbt
 * Change your README.md
+
+## License
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <http://unlicense.org/>
