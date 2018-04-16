@@ -1,4 +1,4 @@
-// See LICENSE for license details.
+// See README.md for license details.
 
 package gcd
 
