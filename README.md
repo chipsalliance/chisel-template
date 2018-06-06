@@ -5,6 +5,10 @@ You've done the chisel [tutorials](https://github.com/ucb-bar/chisel-tutorial.gi
 are ready to start your own chisel project.  The following procedure should get you started
 with a clean running [Chisel3](https://github.com/ucb-bar/chisel3.git) project.
 
+
+> More and more users are finding IntelliJ to be a powerful tool for chisel coding. See the 
+[IntelliJ Installation Guide](https://github.com/ucb-bar/chisel-template/wiki/IntelliJ-Installation-Guide) for how to install it.
+
 ## Make your own Chisel3 project
 ### How to get started
 The first thing you want to do is clone this repo into a directory of your own.  I'd recommend creating a chisel projects directory somewhere
