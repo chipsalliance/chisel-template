@@ -7,7 +7,7 @@ with a clean running [Chisel3](https://github.com/ucb-bar/chisel3.git) project.
 
 
 > More and more users are finding IntelliJ to be a powerful tool for chisel coding. See the 
-[IntelliJ Installation Guide](IntelliJ-Installation-Guide) for how to install it.
+[IntelliJ Installation Guide](https://github.com/ucb-bar/chisel-template/wiki/IntelliJ-Installation-Guide) for how to install it.
 
 ## Make your own Chisel3 project
 ### How to get started
