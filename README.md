@@ -1,12 +1,11 @@
 Chisel Project Template
 =======================
 
-You've done the chisel [tutorials](https://github.com/ucb-bar/chisel-tutorial.git), and now you 
+You've done the Chisel [tutorials](https://github.com/ucb-bar/chisel-tutorial), and now you 
 are ready to start your own chisel project.  The following procedure should get you started
-with a clean running [Chisel3](https://github.com/ucb-bar/chisel3.git) project.
+with a clean running [Chisel3](https://github.com/freechipsproject/chisel3) project.
 
-
-> More and more users are finding IntelliJ to be a powerful tool for chisel coding. See the 
+> More and more users are finding IntelliJ to be a powerful tool for Chisel coding. See the 
 [IntelliJ Installation Guide](https://github.com/ucb-bar/chisel-template/wiki/IntelliJ-Installation-Guide) for how to install it.
 
 ## Make your own Chisel3 project
@@ -78,6 +77,7 @@ test GCD Success: 168 tests passed in 1107 cycles taking 0.203969 seconds
 [success] Total time: 2 s, completed Sep 21, 2017 9:12:47 PM
 ```
 If you see the above then...
+
 ### It worked!
 You are ready to go. We have a few recommended practices and things to do.
 * Use packages and following conventions for [structure](http://www.scala-sbt.org/0.13/docs/Directories.html) and [naming](http://docs.scala-lang.org/style/naming-conventions.html)
@@ -87,6 +87,8 @@ You are ready to go. We have a few recommended practices and things to do.
  * You can remove this dependency in the build.sbt file if necessary
 * Change the name of your project in the build.sbt
 * Change your README.md
+
+There are [instructions for generating Verilog](https://github.com/freechipsproject/chisel3/wiki/Frequently-Asked-Questions#get-me-verilog) on the Chisel wiki.
 
 ## License
 This is free and unencumbered software released into the public domain.
