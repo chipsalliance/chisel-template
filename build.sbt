@@ -28,7 +28,7 @@ name := "chisel-module-template"
 
 version := "3.2-SNAPSHOT"
 
-scalaVersion := "2.11.12"
+scalaVersion := "2.12.6"
 
 crossScalaVersions := Seq("2.11.12", "2.12.4")
 
@@ -43,8 +43,8 @@ val defaultVersions = Map(
   "chisel-iotesters" -> "1.3-SNAPSHOT"
   )
 
-libraryDependencies ++= (Seq("chisel3","chisel-iotesters").map {
-  dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) })
+libraryDependencies ++= Seq("chisel3","chisel-iotesters").map {
+  dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) }
 
 scalacOptions ++= scalacOptionsVersion(scalaVersion.value)
 
