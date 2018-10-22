@@ -32,7 +32,7 @@ version := "3.2-SNAPSHOT"
 
 scalaVersion := "2.12.6"
 
-crossScalaVersions := Seq("2.11.12", "2.12.4")
+crossScalaVersions := Seq("2.11.12", "2.12.6")
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("snapshots"),
