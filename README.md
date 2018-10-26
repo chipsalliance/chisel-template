@@ -84,14 +84,14 @@ You are ready to go. We have a few recommended practices and things to do.
 * Use packages and following conventions for [structure](http://www.scala-sbt.org/0.13/docs/Directories.html) and [naming](http://docs.scala-lang.org/style/naming-conventions.html)
 * Package names should be clearly reflected in the testing hierarchy
 * Build tests for all your work.
- * This template includes a dependency on the Chisel3 IOTesters, this is a reasonable starting point for most tests
- * You can remove this dependency in the build.sbt file if necessary
-* Change the name of your project in the build.sbt
+* This template includes a dependency on the Chisel3 IOTesters, this is a reasonable starting point for most tests
+* You can remove this dependency in the build.sbt file if necessary
+* Change the name of your project in the build.sbt file
 * Change your README.md
 
 There are [instructions for generating Verilog](https://github.com/freechipsproject/chisel3/wiki/Frequently-Asked-Questions#get-me-verilog) on the Chisel wiki.
 
-Some backends (verilator for example) produce VCD files bu default, while other backends (firrtl and treadle) do not.
+Some backends (verilator for example) produce VCD files by default, while other backends (firrtl and treadle) do not.
 You can control the generation of VCD files with the `--generate-vcd-output` flag.
 
 To run the simulation and generate a VCD output file regardless of the backend:
