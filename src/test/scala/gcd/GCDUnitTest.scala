@@ -2,6 +2,8 @@
 
 package gcd
 
+import java.io.File
+
 import chisel3.iotesters
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 
@@ -95,9 +97,35 @@ class GCDTester extends ChiselFlatSpec {
     } should be(true)
   }
 
-  "running with --fint-write-vcd" should "create a vcd file from your test" in {
-    iotesters.Driver.execute(Array("--fint-write-vcd"), () => new GCD) {
+  /**
+    * By default verilator backend produces vcd file, and firrtl and treadle backends do not.
+    * Following examples show you how to turn on vcd for firrtl and treadle and how to turn it off for verilator
+    */
+
+  "running with --generate-vcd-output on" should "create a vcd file from your test" in {
+    iotesters.Driver.execute(
+      Array("--generate-vcd-output", "on", "--target-dir", "test_run_dir/make_a_vcd", "--top-name", "make_a_vcd"),
+      () => new GCD
+    ) {
+
       c => new GCDUnitTester(c)
     } should be(true)
+
+    new File("test_run_dir/make_a_vcd/make_a_vcd.vcd").exists should be (true)
   }
+
+  "running with --generate-vcd-output off" should "not create a vcd file from your test" in {
+    iotesters.Driver.execute(
+      Array("--generate-vcd-output", "off", "--target-dir", "test_run_dir/make_no_vcd", "--top-name", "make_no_vcd",
+      "--backend-name", "verilator"),
+      () => new GCD
+    ) {
+
+      c => new GCDUnitTester(c)
+    } should be(true)
+
+    new File("test_run_dir/make_no_vcd/make_a_vcd.vcd").exists should be (false)
+
+  }
+
 }
