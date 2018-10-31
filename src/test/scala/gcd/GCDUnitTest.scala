@@ -54,11 +54,11 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   * This is a trivial example of how to run this Specification
   * From within sbt use:
   * {{{
-  * testOnly example.test.GCDTester
+  * testOnly gcd.GCDTester
   * }}}
   * From a terminal shell use:
   * {{{
-  * sbt 'testOnly example.test.GCDTester'
+  * sbt 'testOnly gcd.GCDTester'
   * }}}
   */
 class GCDTester extends ChiselFlatSpec {
