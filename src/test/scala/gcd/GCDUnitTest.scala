@@ -63,7 +63,7 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   */
 class GCDTester extends ChiselFlatSpec {
   // Disable this until we fix isCommandAvailable to swallow stderr along with stdout
-  private val backendNames = if(false && firrtl.FileUtils.isCommandAvailable(Seq("verilator", "--version"))) {
+  private val backendNames = if(firrtl.FileUtils.isCommandAvailable(Seq("verilator", "--version"))) {
     Array("firrtl", "verilator")
   }
   else {
@@ -83,8 +83,8 @@ class GCDTester extends ChiselFlatSpec {
     } should be (true)
   }
 
-  "using --backend-name verilator" should "be an alternative way to run using verilator" in {
-    if(backendNames.contains("verilator")) {
+  if(backendNames.contains("verilator")) {
+    "using --backend-name verilator" should "be an alternative way to run using verilator" in {
       iotesters.Driver.execute(Array("--backend-name", "verilator"), () => new GCD) {
         c => new GCDUnitTester(c)
       } should be(true)
