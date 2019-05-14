@@ -4,9 +4,8 @@ package gcd
 
 import chisel3._
 import chisel3.tester._
-import firrtl.ExecutionOptionsManager
 import org.scalatest.FreeSpec
-import treadle.HasTreadleSuite
+import chisel3.experimental.BundleLiterals._
 
 /**
   * This is a trivial example of how to run this Specification
@@ -19,32 +18,34 @@ import treadle.HasTreadleSuite
   * sbt 'testOnly gcd.GcdDecoupledTester'
   * }}}
   */
-class GcdDecoupledTester extends FreeSpec with ChiselScalatestTester {
+//scalastyle:off magic.number
+class GcdTesters2 extends FreeSpec with ChiselScalatestTester {
 
   "Gcd should calculate proper greatest common denominator" in {
-    val manager = new ExecutionOptionsManager("decoupled gcd") with HasTreadleSuite {
-      treadleOptions = treadleOptions.copy(
-        writeVCD = true,
-        setVerbose = false
-      )
-    }
-
-    test(new DecoupledGcd(16), manager) { dut =>
+    test(new DecoupledGcd(16)) { dut =>
       dut.input.initSource()
       dut.input.setSourceClock(dut.clock)
       dut.output.initSink()
       dut.output.setSinkClock(dut.clock)
 
-      val testValues = for { x <- 1 to 10; y <- 1 to 10} yield (x, y)
-      val inputSeq = testValues.map { case (x, y) => (new GcdInputBundle(16)).Lit(x.U, y.U) }
+      val testValues = for { x <- 0 to 10; y <- 0 to 10} yield (x, y)
+      val inputSeq = testValues.map { case (x, y) => (new GcdInputBundle(16)).Lit(_.value1 -> x.U, _.value2 -> y.U) }
       val resultSeq = testValues.map { case (x, y) =>
-        new GcdOutputBundle(16).Lit(x.U, y.U, BigInt(x).gcd(BigInt(y)).U)
+        (new GcdOutputBundle(16)).Lit(_.value1 -> x.U, _.value2 -> y.U, _.gcd -> BigInt(x).gcd(BigInt(y)).U)
       }
 
       fork {
-        dut.input.enqueueSeq(inputSeq)
+        // push inputs into the calculator, stall for 11 cycles one third of the way
+        val (seq1, seq2) = inputSeq.splitAt(resultSeq.length / 3)
+        dut.input.enqueueSeq(seq1)
+        dut.clock.step(11)
+        dut.input.enqueueSeq(seq2)
       }.fork {
-        dut.output.expectDequeueSeq(resultSeq)
+        // retrieve computations from the calculator, stall for 10 cycles one half of the way
+        val (seq1, seq2) = resultSeq.splitAt(resultSeq.length / 2)
+        dut.output.expectDequeueSeq(seq1)
+        dut.clock.step(10)
+        dut.output.expectDequeueSeq(seq2)
       }.join()
 
     }
