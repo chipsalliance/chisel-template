@@ -3,7 +3,6 @@
 package gcd
 
 import chisel3._
-import chisel3.experimental.MultiIOModule
 import chisel3.util.Decoupled
 
 class GcdInputBundle(val w: Int) extends Bundle {
