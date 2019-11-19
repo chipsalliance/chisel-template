@@ -104,6 +104,11 @@ To run the simulation and suppress the generation of a VCD output file:
 sbt 'test:runMain gcd.GCDMain --generate-vcd-output off'
 ```
 
+## Development/Bug Fixes
+This is the release version of chisel-template. If you have bug fixes or
+changes you would like to see incorporated in this repo, please checkout
+the master branch and submit pull requests against it.
+
 ## License
 This is free and unencumbered software released into the public domain.
 
