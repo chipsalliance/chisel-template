@@ -51,3 +51,22 @@ class GcdTesters2 extends FreeSpec with ChiselScalatestTester {
     }
   }
 }
+
+class GcdTesters3 extends GcdTesters2 {
+}
+class GcdTesters4 extends GcdTesters2 {
+}
+class GcdTesters5 extends GcdTesters2 {
+}
+class GcdTesters6 extends GcdTesters2 {
+}
+class GcdTesters7 extends GcdTesters2 {
+}
+class GcdTesters8 extends GcdTesters2 {
+}
+class GcdTesters9 extends GcdTesters2 {
+}
+class GcdTesters10 extends GcdTesters2 {
+}
+class GcdTesters11 extends GcdTesters2 {
+}
