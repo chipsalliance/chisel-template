@@ -110,7 +110,7 @@ class GCDTester extends ChiselFlatSpec {
       c => new GCDUnitTester(c)
     } should be(true)
 
-    new File("test_run_dir/make_a_vcd/make_a_vcd.vcd").exists should be (true)
+    new File("test_run_dir/make_a_vcd/GCD.vcd").exists should be (true)
   }
 
   "running with --generate-vcd-output off" should "not create a vcd file from your test" in {
