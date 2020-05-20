@@ -28,7 +28,7 @@ def javacOptionsVersion(scalaVersion: String): Seq[String] = {
 
 name := "chisel-module-template"
 
-version := "3.2.0"
+version := "3.3.0"
 
 scalaVersion := "2.12.10"
 
@@ -39,14 +39,16 @@ resolvers ++= Seq(
   Resolver.sonatypeRepo("releases")
 )
 
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+
 // Provide a managed dependency on X if -DXVersion="" is supplied on the command line.
-val defaultVersions = Map(
-  "chisel3" -> "3.2.+",
-  "chisel-iotesters" -> "1.3.+"
+val defaultVersions = Seq(
+  "chisel-iotesters" -> "1.4.1+",
+  "chiseltest"  -> "0.2.1+"
   )
 
-libraryDependencies ++= Seq("chisel3","chisel-iotesters").map {
-  dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) }
+libraryDependencies ++= defaultVersions.map { case (dep, ver) =>
+  "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", ver) }
 
 scalacOptions ++= scalacOptionsVersion(scalaVersion.value)
 

@@ -62,7 +62,6 @@ class GCDUnitTester(c: GCD) extends PeekPokeTester(c) {
   * }}}
   */
 class GCDTester extends ChiselFlatSpec {
-  // Disable this until we fix isCommandAvailable to swallow stderr along with stdout
   private val backendNames = if(firrtl.FileUtils.isCommandAvailable(Seq("verilator", "--version"))) {
     Array("firrtl", "verilator")
   }
@@ -111,7 +110,7 @@ class GCDTester extends ChiselFlatSpec {
       c => new GCDUnitTester(c)
     } should be(true)
 
-    new File("test_run_dir/make_a_vcd/make_a_vcd.vcd").exists should be (true)
+    new File("test_run_dir/make_a_vcd/GCD.vcd").exists should be (true)
   }
 
   "running with --generate-vcd-output off" should "not create a vcd file from your test" in {
