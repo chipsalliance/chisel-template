@@ -1,0 +1,55 @@
+# Workflow to cleanup projects created from this template
+# Adapted from workflow of the same name in https://github.com/JetBrains/intellij-platform-plugin-template
+# SPDX-License-Identifier: Apache-2.0
+
+name: Template Cleanup
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # Triggered on first push to repos created from the template
+  template-cleanup:
+    name: Template Cleanup
+    runs-on: ubuntu-latest
+    if: github.event.repository.name != 'chisel-template'
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cleanup
+        run: |
+          export LC_CTYPE=C
+          export LANG=C
+
+          # Prepare variables
+          NAME="${GITHUB_REPOSITORY##*/}"
+          ORG="$GITHUB_REPOSITORY_OWNER"
+          SAFE_ORG=$(echo $ORG | sed 's/[^a-zA-Z0-9]//g' | tr '[:upper:]' '[:lower:]')
+          GROUP="com.github.$SAFE_ORG"
+
+          # Replace placeholders
+          sed -i "s/%NAME%/$NAME/g" build.sbt README.md
+          sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" README.md
+          sed -i "s/%ORGANIZATION%/$GROUP/g" build.sbt
+
+          # Remove lines marked with #REMOVE-ON-CLEANUP#
+          sed -i '/#REMOVE-ON-CLEANUP#/d' README.md
+
+          rm -rf \
+            .github/workflows/template-cleanup.yml \
+            LICENSE
+
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Template cleanup"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
