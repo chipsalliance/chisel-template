@@ -9,7 +9,8 @@ lazy val root = (project in file("."))
     name := "%NAME%",
     libraryDependencies ++= Seq(
       "edu.berkeley.cs" %% "chisel3" % "3.4.2",
-      "edu.berkeley.cs" %% "chiseltest" % "0.3.2" % "test"
+      "edu.berkeley.cs" %% "chiseltest" % "0.3.2" % "test",
+      "edu.berkeley.cs" %% "firrtl-diagrammer" % "1.3.2"
     ),
     scalacOptions ++= Seq(
       "-Xsource:2.11",
