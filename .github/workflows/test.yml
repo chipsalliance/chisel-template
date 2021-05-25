@@ -13,7 +13,13 @@ jobs:
         uses: olafurpg/setup-scala@v10
         with:
           java-version: adopt@1.8
+      - name: Setup Mill
+        uses: jodersky/setup-mill@v0.2.3
+        with:
+          mill-version: 0.9.7
       - name: Cache Scala
         uses: coursier/cache-action@v5
-      - name: Test
+      - name: SBT Test
         run: sbt test
+      - name: mill Test
+        run: mill _.test
