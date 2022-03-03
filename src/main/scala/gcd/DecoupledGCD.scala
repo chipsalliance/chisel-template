@@ -13,7 +13,7 @@ class GcdInputBundle(val w: Int) extends Bundle {
 class GcdOutputBundle(val w: Int) extends Bundle {
   val value1 = UInt(w.W)
   val value2 = UInt(w.W)
-  val gcd    = UInt(w.W)
+  val gcd = UInt(w.W)
 }
 
 /**
@@ -27,18 +27,18 @@ class DecoupledGcd(width: Int) extends MultiIOModule {
   val input = IO(Flipped(Decoupled(new GcdInputBundle(width))))
   val output = IO(Decoupled(new GcdOutputBundle(width)))
 
-  val xInitial    = Reg(UInt())
-  val yInitial    = Reg(UInt())
-  val x           = Reg(UInt())
-  val y           = Reg(UInt())
-  val busy        = RegInit(false.B)
+  val xInitial = Reg(UInt())
+  val yInitial = Reg(UInt())
+  val x = Reg(UInt())
+  val y = Reg(UInt())
+  val busy = RegInit(false.B)
   val resultValid = RegInit(false.B)
 
-  input.ready := ! busy
+  input.ready := !busy
   output.valid := resultValid
   output.bits := DontCare
 
-  when(busy)  {
+  when(busy) {
     when(x > y) {
       x := x - y
     }.otherwise {

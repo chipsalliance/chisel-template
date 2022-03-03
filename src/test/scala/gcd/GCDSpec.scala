@@ -3,9 +3,9 @@
 package gcd
 
 import chisel3._
-import chisel3.tester._
-import org.scalatest.FreeSpec
+import chiseltest._
 import chisel3.experimental.BundleLiterals._
+import org.scalatest.freespec.AnyFreeSpec
 
 /**
   * This is a trivial example of how to run this Specification
@@ -18,7 +18,7 @@ import chisel3.experimental.BundleLiterals._
   * sbt 'testOnly gcd.GcdDecoupledTester'
   * }}}
   */
-class GCDSpec extends FreeSpec with ChiselScalatestTester {
+class GCDSpec extends AnyFreeSpec with ChiselScalatestTester {
 
   "Gcd should calculate proper greatest common denominator" in {
     test(new DecoupledGcd(16)) { dut =>
@@ -27,10 +27,11 @@ class GCDSpec extends FreeSpec with ChiselScalatestTester {
       dut.output.initSink()
       dut.output.setSinkClock(dut.clock)
 
-      val testValues = for { x <- 0 to 10; y <- 0 to 10} yield (x, y)
+      val testValues = for { x <- 0 to 10; y <- 0 to 10 } yield (x, y)
       val inputSeq = testValues.map { case (x, y) => (new GcdInputBundle(16)).Lit(_.value1 -> x.U, _.value2 -> y.U) }
-      val resultSeq = testValues.map { case (x, y) =>
-        (new GcdOutputBundle(16)).Lit(_.value1 -> x.U, _.value2 -> y.U, _.gcd -> BigInt(x).gcd(BigInt(y)).U)
+      val resultSeq = testValues.map {
+        case (x, y) =>
+          (new GcdOutputBundle(16)).Lit(_.value1 -> x.U, _.value2 -> y.U, _.gcd -> BigInt(x).gcd(BigInt(y)).U)
       }
 
       fork {
