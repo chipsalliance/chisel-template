@@ -7,9 +7,12 @@ import scalalib._
 // support BSP
 import mill.bsp._
 
-object %NAME% extends SbtModule { m =>
+object root extends SbtModule { m =>
   override def millSourcePath = os.pwd
   override def scalaVersion = "2.13.8"
+  override def artifactName = "%NAME%"
+  def publishVersion = "0.1.0"
+
   override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",

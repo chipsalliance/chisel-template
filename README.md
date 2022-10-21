@@ -38,8 +38,8 @@ Once you have created a repository from this template and the `Template cleanup`
 Note that it is easiest to push to a repository if you set up SSH with Github, please see the [related documentation](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh). SSH is required for pushing to a Github repository when using two-factor authentication.
 
 ```sh
-git clone git@github.com:%REPOSITORY%.git
-cd %NAME%
+$ git clone git@github.com:%REPOSITORY%.git
+$ cd %NAME%
 ```
 (The variables wrapped in `%` will be filled in by the template cleanup) <!-- #REMOVE-ON-CLEANUP# -->
 
@@ -62,25 +62,33 @@ For more information about a license, check out the [Github Docs](https://docs.g
 
 #### Commit your changes
 ```sh
-git commit -m 'Starting %NAME%'
-git push origin main
+$ git commit -m 'Starting %NAME%'
+$ git push origin main
 ```
 
 ### Did it work?
 
 You should now have a working Chisel3 project.
 
-You can run the included test with:
+You can run the included test with sbt:
 ```sh
-sbt test
+$ sbt test
 ```
 
-You should see a whole bunch of output that ends with something like the following lines
+You should see a whole bunch of output that ends with something like the following lines:
 ```
 [info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 [success] Total time: 5 s, completed Dec 16, 2020 12:18:44 PM
 ```
+
+And if you choose mill to build the project, you should run:
+```sh
+$ mill _.test
+GCDSpec:
+- Gcd should calculate proper greatest common denominator
+```
+
 If you see the above then...
 
 ### It worked!
