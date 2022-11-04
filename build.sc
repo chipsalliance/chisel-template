@@ -18,14 +18,14 @@ object %NAME% extends SbtModule { m =>
     "-P:chiselplugin:genBundleElements"
   )
   override def ivyDeps = Agg(
-    ivy"edu.berkeley.cs::chisel3:3.5.1",
+    ivy"edu.berkeley.cs::chisel3:3.5.4",
   )
   override def scalacPluginIvyDeps = Agg(
-    ivy"edu.berkeley.cs:::chisel3-plugin:3.5.1",
+    ivy"edu.berkeley.cs:::chisel3-plugin:3.5.4",
   )
   object test extends Tests with ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
-      ivy"edu.berkeley.cs::chiseltest:0.5.1"
+      ivy"edu.berkeley.cs::chiseltest:0.5.4"
     )
   }
 }
