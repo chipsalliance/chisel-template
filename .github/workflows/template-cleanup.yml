@@ -30,7 +30,7 @@ jobs:
           GROUP="com.github.$SAFE_ORG"
 
           # Replace placeholders
-          sed -i "s/%NAME%/$NAME/g" build.sbt build.sc README.md
+          sed -i "s/%NAME%/$NAME/g" build.sbt build.sc README.md src/test/scala/gcd
           sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" README.md
           sed -i "s/%ORGANIZATION%/$GROUP/g" build.sbt
 

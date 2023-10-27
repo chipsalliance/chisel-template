@@ -23,7 +23,7 @@ object %NAME% extends SbtModule { m =>
   override def scalacPluginIvyDeps = Agg(
     ivy"org.chipsalliance:::chisel-plugin:5.0.0",
   )
-  object test extends Tests with ScalaTest {
+  object test extends SbtModuleTests with TestModule.ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
       ivy"edu.berkeley.cs::chiseltest:5.0.0"
     )
