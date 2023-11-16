@@ -75,6 +75,11 @@ You can run the included test with:
 sbt test
 ```
 
+Alternatively, if you use Mill:
+```sh
+mill %NAME%.test
+```
+
 You should see a whole bunch of output that ends with something like the following lines
 ```
 [info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
