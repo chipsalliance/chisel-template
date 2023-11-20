@@ -18,7 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # These are needed to make ad-m/github-push-action work
+          # https://github.com/ad-m/github-push-action/tree/d91a481090679876dfc4178fef17f286781251df#example-workflow-file
           persist-credentials: false
+          fetch-depth: 0
 
       - name: Cleanup
         run: |
