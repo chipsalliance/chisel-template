@@ -11,6 +11,8 @@ jobs:
   # Triggered on first push to repos created from the template
   template-cleanup:
     name: Template Cleanup
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     if: github.event.repository.name != 'chisel-template'
     steps:
