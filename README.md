@@ -11,12 +11,16 @@ with a clean running [Chisel3](https://www.chisel-lang.org/) project.
 
 #### JDK 8 or newer
 
-We recommend LTS releases Java 8 and Java 11. You can install the JDK as recommended by your operating system, or use the prebuilt binaries from [AdoptOpenJDK](https://adoptopenjdk.net/).
+We recommend LTS releases Java 8 and Java 11. You can install the JDK as your operating system recommends, or use the prebuilt binaries from [AdoptOpenJDK](https://adoptopenjdk.net/).
 
 #### SBT or mill
 
-SBT is the most common built tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).  
+SBT is the most commonly built tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).  
 mill is another Scala/Java build tool without obscure DSL like SBT. You can download it [here](https://github.com/com-lihaoyi/mill/releases)
+
+#### Verilator
+
+The test with `svsim` needs Verilator installed.
 
 ### How to get started
 
