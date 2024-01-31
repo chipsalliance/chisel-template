@@ -15,7 +15,7 @@ We recommend LTS releases Java 8 and Java 11. You can install the JDK as your op
 
 #### SBT or mill
 
-SBT is the most commonly built tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).  
+SBT is the most common build tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).  
 mill is another Scala/Java build tool without obscure DSL like SBT. You can download it [here](https://github.com/com-lihaoyi/mill/releases)
 
 #### Verilator
