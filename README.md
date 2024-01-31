@@ -21,6 +21,7 @@ mill is another Scala/Java build tool without obscure DSL like SBT. You can down
 #### Verilator
 
 The test with `svsim` needs Verilator installed.
+See Verilator installation instructions [here](https://verilator.org/guide/latest/install.html).
 
 ### How to get started
 
