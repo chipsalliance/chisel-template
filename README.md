@@ -101,7 +101,7 @@ You are ready to go. We have a few recommended practices and things to do.
 * Package names should be clearly reflected in the testing hierarchy
 * Build tests for all your work
 * Read more about testing in SBT in the [SBT docs](https://www.scala-sbt.org/1.x/docs/Testing.html)
-* This template includes a [test dependency](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html#Per-configuration+dependencies) on [chiseltest](https://github.com/ucb-bar/chisel-testers2), this is a reasonable starting point for most tests
+* This template includes a [test dependency](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html#Per-configuration+dependencies) on [ScalaTest](https://www.scalatest.org/). This, coupled with `svsim` (included with Chisel) and `verilator`, are a starting point for testing Chisel generators.
   * You can remove this dependency in the build.sbt file if you want to
 * Change the name of your project in the build.sbt file
 * Change your README.md
