@@ -52,7 +52,7 @@ jobs:
         run: |
           echo "$(pwd)/${{ env.verilator-install-dir }}/bin" >> $GITHUB_PATH
           echo VERILATOR_ROOT="$(pwd)/${{ env.verilator-install-dir }}/share/verilator" >> $GITHUB_ENV
-          ln -s $(pwd)/${{ env.verilator-install-dir }}/bin/verilator_bin $(pwd)/${{ env.verilator-install-dir }}/share/verilator/verilator_bin
+          ln -sf $(pwd)/${{ env.verilator-install-dir }}/bin/verilator_bin $(pwd)/${{ env.verilator-install-dir }}/share/verilator/verilator_bin
       - name: SBT Test
         run: sbt test
       - name: mill Test
