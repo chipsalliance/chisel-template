@@ -5,6 +5,7 @@ on:
     tags: ['*']
     branches: ['main']
   pull_request:
+  workflow_dispatch:
 
 env:
   verilator-version: v5.012
