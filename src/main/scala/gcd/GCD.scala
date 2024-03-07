@@ -38,12 +38,8 @@ class GCD extends Module {
  * Generate Verilog sources and save it in file GCD.v
  */
 object GCD extends App {
-  val verilog_src = ChiselStage.emitSystemVerilog(
+  val verilog_src = ChiselStage.emitSystemVerilogFile(
       new GCD(),
       firtoolOpts = Array("-disable-all-randomization",
                           "-strip-debug-info"))
-  val fverilog = os.pwd / "GCD.v"
-  if(os.exists(fverilog))
-    os.remove(fverilog)
-  os.write(fverilog, verilog_src)
 }
