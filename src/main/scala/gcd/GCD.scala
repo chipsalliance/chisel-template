@@ -3,6 +3,8 @@
 package gcd
 
 import chisel3._
+// _root_ disambiguates from package chisel3.util.circt if user imports chisel3.util._
+import _root_.circt.stage.ChiselStage
 
 /**
   * Compute GCD using subtraction method.
@@ -31,4 +33,14 @@ class GCD extends Module {
 
   io.outputGCD := x
   io.outputValid := y === 0.U
+}
+
+/**
+ * Generate Verilog sources and save it in file GCD.v
+ */
+object GCD extends App {
+  ChiselStage.emitSystemVerilogFile(
+    new GCD,
+    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info")
+  )
 }
