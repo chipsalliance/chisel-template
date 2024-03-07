@@ -3,6 +3,7 @@
 package gcd
 
 import chisel3._
+import circt.stage.ChiselStage
 
 /**
   * Compute GCD using subtraction method.
@@ -31,4 +32,15 @@ class GCD extends Module {
 
   io.outputGCD := x
   io.outputValid := y === 0.U
+}
+
+/**
+ * Generate Verilog sources and save it in file GCD.v
+ */
+object GCD extends App {
+  val verilog_src = ChiselStage.emitSystemVerilog(
+      new GCD(),
+      firtoolOpts = Array("-disable-all-randomization",
+                          "-strip-debug-info"))
+  os.write(os.pwd / "GCD.v", verilog_src)
 }
