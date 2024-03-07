@@ -42,5 +42,8 @@ object GCD extends App {
       new GCD(),
       firtoolOpts = Array("-disable-all-randomization",
                           "-strip-debug-info"))
-  os.write(os.pwd / "GCD.v", verilog_src)
+  val fverilog = os.pwd / "GCD.v"
+  if(os.exists(fverilog))
+    os.remove(fverilog)
+  os.write(fverilog, verilog_src)
 }
