@@ -36,12 +36,12 @@ jobs:
           SAFE_ORG=$(echo $ORG | sed 's/[^a-zA-Z0-9]//g' | tr '[:upper:]' '[:lower:]')
           GROUP="com.github.$SAFE_ORG"
 
-          # Modify NAME to replace '-' with '_'
-          MODIFIED_NAME=$(echo "$NAME" | tr '-' '_')
+          # Prepare wrapped name
+          WRAPPED_NAME="\`${NAME}\`"
 
           # Replace placeholders
           sed -i "s/%NAME%/$NAME/g" build.sbt README.md src/test/scala/gcd/*
-          sed -i "s/%NAME%/$MODIFIED_NAME/g" build.sc
+          sed -i "s/%NAME%/$WRAPPED_NAME/g" build.sc
           sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" README.md
           sed -i "s/%ORGANIZATION%/$GROUP/g" build.sbt
 
