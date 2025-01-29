@@ -26,7 +26,10 @@ jobs:
         uses: coursier/setup-action@v1
         with:
           jvm: adopt:11
-          apps: sbt mill
+          apps: sbt
+      - name: Setup Mill
+        run: |
+          curl -L https://github.com/com-lihaoyi/mill/releases/download/0.12.5/0.12.5 > mill && chmod +x mill
       - name: Setup Dependencies
         run: |
           sudo apt-get install ccache
@@ -56,4 +59,4 @@ jobs:
       - name: SBT Test
         run: sbt test
       - name: mill Test
-        run: mill _.test
+        run: ./mill _.test
