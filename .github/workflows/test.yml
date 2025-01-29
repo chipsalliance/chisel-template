@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cleanup
-        run: sed -i "s/%NAME%/test/g" build.sc
+        run: sed -i "s/%NAME%/test/g" build.mill
       - name: Cache Scala
         uses: coursier/cache-action@v6
       - name: Setup Scala
