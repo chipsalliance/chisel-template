@@ -7,6 +7,12 @@ import scalalib._
 // support BSP
 import mill.bsp._
 
+// Note: This project requires .mill-jvm-opts file containing:
+//   -Dchisel.project.root=${PWD}
+// This is needed because Chisel needs to know the project root directory
+// to properly generate and handle test directories and output files.
+// See: https://github.com/com-lihaoyi/mill/issues/3840
+
 object %NAME% extends SbtModule { m =>
   override def millSourcePath = super.millSourcePath / os.up
   override def scalaVersion = "2.13.15"
