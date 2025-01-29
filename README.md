@@ -9,9 +9,9 @@ with a clean running [Chisel3](https://www.chisel-lang.org/) project.
 
 ### Dependencies
 
-#### JDK 8 or newer
+#### JDK 11 or newer
 
-We recommend LTS releases Java 8 and Java 11. You can install the JDK as your operating system recommends, or use the prebuilt binaries from [AdoptOpenJDK](https://adoptopenjdk.net/).
+We recommend using Java 11 or later LTS releases. While Chisel itself works with Java 8, our preferred build tool Mill requires Java 11. You can install the JDK as your operating system recommends, or use the prebuilt binaries from [Adoptium](https://adoptium.net/) (formerly AdoptOpenJDK).
 
 #### SBT or mill
 
