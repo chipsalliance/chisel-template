@@ -41,7 +41,7 @@ jobs:
 
           # Replace placeholders
           sed -i "s/%NAME%/$NAME/g" build.sbt README.md src/test/scala/gcd/*
-          sed -i "s/%NAME%/$WRAPPED_NAME/g" build.sc
+          sed -i "s/%NAME%/$WRAPPED_NAME/g" build.mill
           sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" README.md
           sed -i "s/%ORGANIZATION%/$GROUP/g" build.sbt
 
