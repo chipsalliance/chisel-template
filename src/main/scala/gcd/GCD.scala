@@ -41,6 +41,6 @@ class GCD extends Module {
 object GCD extends App {
   ChiselStage.emitSystemVerilogFile(
     new GCD,
-    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info")
+    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info", "-default-layer-specialization=enable")
   )
 }

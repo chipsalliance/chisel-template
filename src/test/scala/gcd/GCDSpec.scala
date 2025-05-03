@@ -4,7 +4,7 @@ package gcd
 
 import chisel3._
 import chisel3.experimental.BundleLiterals._
-import chisel3.simulator.EphemeralSimulator._
+import chisel3.simulator.scalatest.ChiselSim
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 
@@ -23,7 +23,7 @@ import org.scalatest.matchers.must.Matchers
   * mill %NAME%.test.testOnly gcd.GCDSpec
   * }}}
   */
-class GCDSpec extends AnyFreeSpec with Matchers {
+class GCDSpec extends AnyFreeSpec with Matchers with ChiselSim {
 
   "Gcd should calculate proper greatest common denominator" in {
     simulate(new DecoupledGcd(16)) { dut =>
