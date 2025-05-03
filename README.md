@@ -15,8 +15,10 @@ We recommend using Java 11 or later LTS releases. While Chisel itself works with
 
 #### SBT or mill
 
-SBT is the most common build tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).  
-mill is another Scala/Java build tool without obscure DSL like SBT. You can download it [here](https://github.com/com-lihaoyi/mill/releases)
+SBT is the most common build tool in the Scala community. You can download it [here](https://www.scala-sbt.org/download.html).
+Mill is another Scala/Java build tool preferred by Chisel's developers.
+This repository includes a bootstrap script `./mill` so that no installation is necessary.
+You can read more about Mill on its website: https://mill-build.org.
 
 #### Verilator
 
@@ -82,7 +84,7 @@ sbt test
 
 Alternatively, if you use Mill:
 ```sh
-mill %NAME%.test
+./mill %NAME%.test
 ```
 
 You should see a whole bunch of output that ends with something like the following lines

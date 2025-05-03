@@ -27,9 +27,6 @@ jobs:
         with:
           jvm: adopt:11
           apps: sbt
-      - name: Setup Mill
-        run: |
-          curl -L https://github.com/com-lihaoyi/mill/releases/download/0.12.5/0.12.5 > mill && chmod +x mill
       - name: Setup Dependencies
         run: |
           sudo apt-get install ccache
