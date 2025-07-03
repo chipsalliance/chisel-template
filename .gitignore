@@ -71,6 +71,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.bloop
 
 # Eclipse Core
 .project
@@ -325,6 +326,8 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
+.metals
+
 ### Java template
 *.class
 
