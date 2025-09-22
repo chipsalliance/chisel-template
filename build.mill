@@ -16,6 +16,7 @@ import mill.bsp._
 object %NAME% extends SbtModule { m =>
   override def millSourcePath = super.millSourcePath / os.up
   override def scalaVersion = "2.13.16"
+  def chiselVersion = "7.0.0"
   override def scalacOptions = Seq(
     "-language:reflectiveCalls",
     "-deprecation",
@@ -24,10 +25,10 @@ object %NAME% extends SbtModule { m =>
     "-Ymacro-annotations",
   )
   override def ivyDeps = Agg(
-    ivy"org.chipsalliance::chisel:7.0.0-RC1",
+    ivy"org.chipsalliance::chisel:$chiselVersion",
   )
   override def scalacPluginIvyDeps = Agg(
-    ivy"org.chipsalliance:::chisel-plugin:7.0.0-RC1",
+    ivy"org.chipsalliance:::chisel-plugin:$chiselVersion",
   )
   object test extends SbtTests with TestModule.ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
