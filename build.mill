@@ -12,7 +12,7 @@ import mill.scalalib._
 
 object %NAME% extends SbtModule {
   def scalaVersion = "2.13.18"
-  def chiselVersion = "7.7.0"
+  def chiselVersion = "7.17.0"
 
   def moduleDir = super.moduleDir / os.up
 
